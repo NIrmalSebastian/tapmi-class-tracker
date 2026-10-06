@@ -4,7 +4,7 @@
     "program": "MBA-AI&DS (Batch 2025\u20132027)",
     "term": "Term 5",
     "period": "28 September 2026 \u2013 30 December 2026",
-    "source": "TAPMI Term 5 timetable dated 24.09.2026"
+    "source": "TAPMI Term 5 timetable dated 24.09.2026; visually mapped from timetable grid"
   },
   "slots": [
     [
@@ -102,21 +102,21 @@
     },
     {
       "date": "2026-10-05",
-      "start": "08:45",
+      "start": "10:15",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 1
     },
     {
       "date": "2026-10-05",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 2
     },
     {
       "date": "2026-10-05",
-      "start": "17:45",
+      "start": "16:00",
       "course": "IT Project Management (Elective)",
       "room": "GF 22",
       "session": 4
@@ -137,14 +137,14 @@
     },
     {
       "date": "2026-10-07",
-      "start": "08:45",
+      "start": "10:15",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 3
     },
     {
       "date": "2026-10-07",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 4
@@ -165,7 +165,7 @@
     },
     {
       "date": "2026-10-08",
-      "start": "08:45",
+      "start": "10:15",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 5
@@ -186,24 +186,17 @@
     },
     {
       "date": "2026-10-09",
-      "start": "08:45",
+      "start": "10:15",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 6
     },
     {
       "date": "2026-10-09",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Sustainability, Responsibility and Managerial Ethics",
       "room": "BS 03",
       "session": 7
-    },
-    {
-      "date": "2026-10-13",
-      "start": "08:45",
-      "course": "IT Project Management (Elective)",
-      "room": "GF 22",
-      "session": 5
     },
     {
       "date": "2026-10-13",
@@ -249,7 +242,7 @@
     },
     {
       "date": "2026-10-16",
-      "start": "11:45",
+      "start": "10:15",
       "course": "IT Project Management (Elective)",
       "room": "GF 22",
       "session": 6
@@ -305,28 +298,28 @@
     },
     {
       "date": "2026-10-25",
-      "start": "11:45",
+      "start": "10:15",
       "course": "AI for Management-2",
       "room": "BS 03",
       "session": 3
     },
     {
       "date": "2026-10-25",
-      "start": "14:30",
+      "start": "11:45",
       "course": "AI for Management-2",
       "room": "BS 03",
       "session": 4
     },
     {
       "date": "2026-10-26",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Cloud Computing for Business",
       "room": "BS 03",
       "session": 1
     },
     {
       "date": "2026-10-26",
-      "start": "11:45",
+      "start": "19:15",
       "course": "IT Project Management (Elective)",
       "room": "GF 22",
       "session": 8
@@ -382,7 +375,7 @@
     },
     {
       "date": "2026-10-29",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Cloud Computing for Business",
       "room": "BS 03",
       "session": 4
@@ -410,21 +403,21 @@
     },
     {
       "date": "2026-10-30",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Cloud Computing for Business",
       "room": "BS 03",
       "session": 5
     },
     {
       "date": "2026-10-30",
-      "start": "11:45",
+      "start": "14:30",
       "course": "Cloud Computing for Business",
       "room": "BS 03",
       "session": 6
     },
     {
       "date": "2026-10-31",
-      "start": "10:15",
+      "start": "11:45",
       "course": "Cloud Computing for Business",
       "room": "BS 03",
       "session": 7
@@ -444,7 +437,7 @@
       "subtitle": "Academic event"
     },
     {
-      "date": "2026-10-20",
+      "date": "2026-10-19",
       "type": "holiday",
       "title": "Vijaya Dashami",
       "subtitle": "Holiday"
@@ -452,7 +445,7 @@
     {
       "date": "2026-10-24",
       "type": "event",
-      "title": "AI&DS Internship Viva Voce",
+      "title": "AI&DS Conclave",
       "subtitle": "Academic event"
     }
   ]

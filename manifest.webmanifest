@@ -1,0 +1,9 @@
+{
+  "name": "TAPMI Class Tracker",
+  "short_name": "TAPMI Tracker",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#111827",
+  "description": "MBA-AI&DS Term 5 class timetable and attendance tracker."
+}

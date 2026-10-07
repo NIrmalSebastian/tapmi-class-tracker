@@ -1,112 +1,26 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<link rel="manifest" href="manifest.webmanifest">
-<title>TAPMI Class Tracker</title>
-<style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#687386;--line:#e5e9f0;--accent:#4f46e5;--accent2:#eef2ff;--shadow:0 8px 28px rgba(20,30,55,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input{font:inherit}.app{max-width:1050px;margin:auto;padding:20px 16px 60px}
-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
-.brand h1{margin:0;font-size:26px}.brand p{margin:5px 0 0;color:var(--muted);font-size:14px}
-.actions{display:flex;gap:8px}.btn{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:9px 12px;cursor:pointer;color:var(--text)}
-.hero{background:linear-gradient(135deg,#111827,#3730a3);color:white;border-radius:20px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
-.hero-top{display:flex;justify-content:space-between;gap:16px;align-items:center}.hero h2{margin:0 0 4px;font-size:24px}.hero p{margin:0;color:#d9def5}
-.clock{font-size:14px;background:rgba(255,255,255,.12);padding:9px 11px;border-radius:10px;white-space:nowrap}
-.next{margin-top:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px}
-.next-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#cbd5ff}.next-title{font-size:19px;font-weight:700;margin:3px 0}.next-meta{font-size:13px;color:#d9def5}
-.tabs{display:flex;gap:8px;margin:16px 0;overflow:auto}.tab{border:1px solid var(--line);background:var(--card);padding:10px 15px;border-radius:12px;cursor:pointer;white-space:nowrap}.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0}.date-nav{display:flex;gap:8px;align-items:center}.date-nav button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 11px;cursor:pointer}.date-title{font-weight:700}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.class-list{display:grid;gap:1px;background:var(--line)}.class-card{background:var(--card);padding:16px;display:flex;gap:15px;align-items:center}.time{min-width:105px;font-size:13px;color:var(--muted);font-weight:600}.course{font-weight:750}.meta{font-size:13px;color:var(--muted);margin-top:5px}.badge{margin-left:auto;font-size:12px;background:var(--accent2);color:#3730a3;border-radius:999px;padding:6px 9px}
-.empty{padding:34px 20px;text-align:center;color:var(--muted)}.event{padding:14px 16px;background:#fff7ed;border-left:4px solid #f59e0b}.event strong{display:block}.event span{font-size:13px;color:#8a5a13}
-.week{overflow-x:auto}.week-grid{min-width:760px;display:grid;grid-template-columns:72px repeat(7,1fr)}.wg-head{padding:10px 7px;border-bottom:1px solid var(--line);text-align:center;font-size:12px;color:var(--muted)}.wg-time{padding:9px 6px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}.wg-cell{min-height:74px;padding:6px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}.mini{border-radius:9px;padding:7px;background:var(--accent2);color:#312e81;font-size:11px;height:100%;font-weight:650}.mini small{display:block;font-weight:500;margin-top:3px;color:#55508e}
-.att-grid{display:grid;gap:10px}.att-row{display:grid;grid-template-columns:1fr 80px 80px 90px;gap:8px;align-items:center;padding:13px;border-bottom:1px solid var(--line)}.att-row.head{font-size:12px;color:var(--muted);font-weight:700}.att-row input{width:70px;padding:7px;border:1px solid var(--line);border-radius:8px}.pct{font-weight:700}.progress{height:7px;background:#e8ebf2;border-radius:99px;overflow:hidden;margin-top:7px}.progress i{display:block;height:100%;background:var(--accent)}
-.notice{margin:14px 0;padding:12px 14px;border-radius:12px;background:#eef2ff;color:#3730a3;font-size:13px}
-@media(max-width:650px){.app{padding:14px 10px 50px}.hero{padding:18px}.hero-top{align-items:flex-start}.hero h2{font-size:21px}.clock{font-size:12px}.class-card{padding:13px;gap:10px}.time{min-width:91px}.badge{display:none}.att-row{grid-template-columns:1fr 55px 55px 70px;font-size:13px}.att-row input{width:52px}.brand h1{font-size:22px}}
-</style>
-</head>
-<body>
-<div class="app">
-<header>
-  <div class="brand"><h1>🎓 TAPMI Class Tracker</h1><p>MBA-AI&DS · Batch 2025–2027 · Term 5</p></div>
-  <div class="actions"><button class="btn" id="installBtn" hidden>Install</button><button class="btn" id="themeBtn">☾</button></div>
-</header>
-<section class="hero">
-  <div class="hero-top"><div><h2 id="todayHeading"></h2><p id="todaySub"></p></div><div class="clock" id="clock"></div></div>
-  <div class="next" id="nextBox"></div>
-</section>
-<nav class="tabs">
-  <button class="tab active" data-view="today">Today</button>
-  <button class="tab" data-view="week">Week</button>
-  <button class="tab" data-view="attendance">Attendance</button>
-</nav>
-<main id="main"></main>
-</div>
-<script>
-const DATA_URL='data.json';
-let data=null, view='today', selectedDate=new Date();
-let deferredPrompt=null;
-const $=s=>document.querySelector(s);
-const fmtDate=d=>d.toISOString().slice(0,10);
-const parseDate=s=>new Date(s+'T00:00:00');
-const prettyDate=d=>d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-const time12=t=>new Date('2000-01-01T'+t).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'});
-const minutes=t=>{let [h,m]=t.split(':').map(Number);return h*60+m};
-function classesOn(s){return data.classes.filter(x=>x.date===s).sort((a,b)=>a.start.localeCompare(b.start))}
-function eventsOn(s){return data.events.filter(x=>x.date===s)}
-function courseList(){return [...new Set(data.classes.map(x=>x.course))]}
-function render(){
-  $('#todayHeading').textContent=prettyDate(selectedDate);
-  $('#todaySub').textContent='Term 5 · 28 Sep – 30 Dec 2026';
-  updateClock(); renderNext();
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
-  if(view==='today') renderToday(); else if(view==='week') renderWeek(); else renderAttendance();
-}
-function renderNext(){
-  const now=new Date(), today=fmtDate(now), current=minutes(now.toTimeString().slice(0,5));
-  let candidates=data.classes.filter(x=>x.date>today || (x.date===today && minutes(x.start)>current)).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
-  const n=candidates[0];
-  if(!n){$('#nextBox').innerHTML='<div class="next-label">Schedule</div><div class="next-title">No upcoming classes in the loaded timetable</div>';return}
-  let label=n.date===today?'Next class':'Next scheduled class';
-  $('#nextBox').innerHTML=`<div class="next-label">${label}</div><div class="next-title">${n.course}</div><div class="next-meta">${prettyDate(parseDate(n.date))} · ${time12(n.start)} · ${n.room}</div>`;
-}
-function renderToday(){
-  const s=fmtDate(selectedDate), list=classesOn(s), ev=eventsOn(s);
-  let h=`<div class="toolbar"><div class="date-nav"><button onclick="moveDay(-1)">‹</button><div class="date-title">${prettyDate(selectedDate)}</div><button onclick="moveDay(1)">›</button></div><button class="btn" onclick="goToday()">Today</button></div>`;
-  if(ev.length) h+=ev.map(e=>`<div class="event"><strong>${e.title}</strong><span>${e.subtitle}</span></div>`).join('');
-  h+='<section class="card">';
-  if(!list.length) h+='<div class="empty">No classes scheduled for this date.</div>';
-  else h+='<div class="class-list">'+list.map(x=>`<div class="class-card"><div class="time">${time12(x.start)}<br>– ${time12(data.slots.find(z=>z[0]===x.start)?.[1]||x.start)}</div><div><div class="course">${x.course}</div><div class="meta">📍 ${x.room} · Session ${x.session}</div></div><div class="badge">${x.room}</div></div>`).join('')+'</div>';
-  h+='</section>';
-  $('#main').innerHTML=h;
-}
-function startOfWeek(d){let x=new Date(d);let day=x.getDay();let diff=day===0?-6:1-day;x.setDate(x.getDate()+diff);return x}
-function renderWeek(){
-  const start=startOfWeek(selectedDate), days=[...Array(7)].map((_,i)=>{let d=new Date(start);d.setDate(start.getDate()+i);return d});
-  const slots=data.slots;
-  let h='<div class="toolbar"><div class="date-title">Week of '+start.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+'</div><button class="btn" onclick="goToday()">Current week</button></div><div class="card week"><div class="week-grid"><div class="wg-head"></div>'+days.map(d=>`<div class="wg-head">${d.toLocaleDateString('en-IN',{weekday:'short'})}<br>${d.getDate()}</div>`).join('');
-  slots.forEach(sl=>{h+=`<div class="wg-time">${time12(sl[0])}</div>`;days.forEach(d=>{let s=fmtDate(d), c=classesOn(s).find(x=>x.start===sl[0]);h+=`<div class="wg-cell">${c?`<div class="mini">${c.course}<small>${c.room} · S${c.session}</small></div>`:''}</div>`})});
-  h+='</div></div>'; $('#main').innerHTML=h;
-}
-function renderAttendance(){
-  const key='tapmi-attendance-v1'; const saved=JSON.parse(localStorage.getItem(key)||'{}');
-  let h='<div class="notice">Attendance is saved only on this device/browser. Enter attended and total classes for each subject.</div><section class="card"><div class="att-grid"><div class="att-row head"><div>Subject</div><div>Attended</div><div>Total</div><div>Rate</div></div>';
-  courseList().forEach((c,i)=>{let id='c'+i, v=saved[id]||{a:'',t:''}, p=v.t?Math.round((Number(v.a)/Number(v.t))*100):0;h+=`<div class="att-row"><div><strong>${c}</strong><div class="progress"><i style="width:${Math.min(p,100)}%"></i></div></div><input type="number" min="0" value="${v.a}" data-id="${id}" data-k="a"><input type="number" min="0" value="${v.t}" data-id="${id}" data-k="t"><div class="pct">${v.t?p+'%':'—'}</div></div>`});
-  h+='</div></section>';$('#main').innerHTML=h;
-  document.querySelectorAll('.att-row input').forEach(inp=>inp.addEventListener('input',e=>{let s=JSON.parse(localStorage.getItem(key)||'{}');s[e.target.dataset.id]=s[e.target.dataset.id]||{a:'',t:''};s[e.target.dataset.id][e.target.dataset.k]=e.target.value;localStorage.setItem(key,JSON.stringify(s));renderAttendance()}));
-}
-function moveDay(n){selectedDate.setDate(selectedDate.getDate()+n);render()}
-function goToday(){selectedDate=new Date();render()}
-function updateClock(){const now=new Date();$('#clock').textContent=now.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',second:'2-digit'});}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.view;render()}));
-$('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');if(dark){document.documentElement.style.setProperty('--bg','#0b1020');document.documentElement.style.setProperty('--card','#121a2b');document.documentElement.style.setProperty('--text','#edf2ff');document.documentElement.style.setProperty('--muted','#9aa6bf');document.documentElement.style.setProperty('--line','#273149');document.documentElement.style.setProperty('--accent2','#202a55')}else location.reload();};
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installBtn').hidden=false});
-$('#installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('#installBtn').hidden=true}};
-setInterval(()=>{updateClock();if(view==='today')renderNext()},1000);
-fetch(DATA_URL).then(r=>r.json()).then(d=>{data=d;render()}).catch(()=>{$('#main').innerHTML='<div class="card empty">Could not load timetable data. Keep data.json beside index.html.</div>'});
-</script>
-</body>
-</html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TAPMI Class Tracker</title><meta name="theme-color" content="#0b1020"><style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#687386;--line:#e5e9f0;--accent:#1f6feb;--ok:#14804a;--bad:#c62828}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}header{background:#0b1020;color:#fff;padding:18px 22px;position:sticky;top:0;z-index:10}.bar,.wrap{max-width:1180px;margin:auto}.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800}.sub{font-size:12px;color:#b8c2d5;margin-top:3px}.wrap{padding:24px 16px}button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}button.primary{background:var(--accent);color:#fff}button.ghost{background:#eef3fb;color:#244}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 5px 18px #14213d08}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{font-size:28px;font-weight:800}.muted{color:var(--muted)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button.active{background:#0b1020;color:#fff}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.class{border-left:5px solid var(--accent);margin:10px 0;padding:13px 14px;background:#fff;border-radius:12px;border:1px solid var(--line)}.class.present{border-left-color:var(--ok)}.class.absent{border-left-color:var(--bad)}.time{font-weight:800}.status{font-size:12px;font-weight:800}.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.login{max-width:430px;margin:70px auto}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:10px;font:inherit}.notice,.err{padding:12px;border-radius:10px;margin:12px 0}.notice{background:#fff7df;color:#775500}.err{background:#fff0f0;color:#a11}.hidden{display:none!important}@media(max-width:800px){.grid{grid-template-columns:1fr}.row{align-items:flex-start;flex-direction:column}}
+</style></head><body>
+<header><div class="bar"><div><div class="brand">TAPMI Class Tracker</div><div class="sub">MBA-AI&DS (2025–2027) • Term 5</div></div><div id="account"></div></div></header>
+<main class="wrap">
+<section id="login" class="login card"><h2>Batch login</h2><p class="muted">Use your Manipal learner email and your Supabase password.</p><div id="loginErr" class="err hidden"></div><div class="field"><label>Email</label><input id="email" type="email"></div><div class="field"><label>Password</label><input id="password" type="password"></div><button class="primary" onclick="doLogin()">Sign in</button></section>
+<section id="app" class="hidden"><div id="welcome" class="card"></div><div class="tabs"><button id="dashBtn" class="active" onclick="tab('dash')">Dashboard</button><button onclick="tab('today')">Today's classes</button><button onclick="tab('attendance')">Batch attendance</button><button id="adminBtn" class="hidden" onclick="tab('admin')">Admin</button><button class="ghost" onclick="doLogout()">Sign out</button></div><div id="dash"></div><div id="today" class="hidden"></div><div id="attendance" class="hidden"></div><div id="admin" class="hidden"></div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
+const sb=supabase.createClient(TAPMI_CONFIG.supabaseUrl,TAPMI_CONFIG.supabasePublishableKey);let me,profile,subjects=[],classes=[],mine=[],profiles=[];
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const att=id=>mine.find(x=>x.class_id===id);
+async function doLogin(){loginErr.classList.add("hidden");let r=await sb.auth.signInWithPassword({email:email.value.trim(),password:password.value});if(r.error){loginErr.textContent=r.error.message;loginErr.classList.remove("hidden");return}await boot()}
+async function doLogout(){await sb.auth.signOut();location.reload()}
+async function boot(){let u=await sb.auth.getUser();me=u.data.user;if(!me)return;let p=await sb.from("profiles").select("*").eq("id",me.id).single();if(p.error){loginErr.textContent="Login works, but your profile is not linked. Contact an admin.";loginErr.classList.remove("hidden");return}profile=p.data;login.classList.add("hidden");app.classList.remove("hidden");account.textContent=profile.full_name+" · "+profile.role;if(profile.role==="admin")adminBtn.classList.remove("hidden");await load();render()}
+async function load(){let [s,c,a]=await Promise.all([sb.from("subjects").select("*").order("name"),sb.from("classes").select("*,subjects(name,credits)").order("class_date").order("start_time"),sb.from("attendance").select("*").eq("student_id",me.id)]);if(s.error||c.error||a.error){alert((s.error||c.error||a.error).message);return}subjects=s.data||[];classes=c.data||[];mine=a.data||[];if(profile.role==="admin"){let p=await sb.from("profiles").select("student_id,full_name,email,role").order("student_id");profiles=p.data||[]}}
+function tab(x){["dash","today","attendance","admin"].forEach(y=>document.getElementById(y).classList.toggle("hidden",x!==y));document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));if(x==="dash")dashBtn.classList.add("active")}
+function render(){welcome.innerHTML='<div class="row"><div><h2 style="margin:0">Hi, '+esc(profile.full_name.split(" ")[0])+' 👋</h2><div class="muted">'+esc(profile.student_id)+' · '+esc(profile.email)+'</div></div><b>'+profile.role.toUpperCase()+'</b></div>';renderDash();renderToday();renderAttendance();if(profile.role==="admin")renderAdmin()}
+function renderDash(){dash.innerHTML='<h3>My attendance</h3><div class="grid">'+subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length,allow=s.skip_allowance??s.credits;return '<div class="card"><b>'+esc(s.name)+'</b><div class="muted">'+s.credits+' credits</div><div class="stat">'+p+'/'+(p+a)+'</div><div class="muted">'+Math.max(0,allow-a)+' skip(s) remaining</div></div>'}).join("")+'</div>'}
+function classCard(c){let a=att(c.id),st=a?.status;return '<div class="class '+(st||"")+'"><div class="row"><div><div class="time">'+c.class_date+' · '+c.start_time.slice(0,5)+'–'+c.end_time.slice(0,5)+'</div><b>'+esc(c.subjects?.name||"Class")+'</b><div class="muted">Room: '+esc(c.room||"—")+' · Session '+(c.session_number||"—")+'</div>'+(st?'<div class="status '+(st==="present"?"ok":"bad")+'">'+st.toUpperCase()+'</div>':"")+'</div><button class="'+(st?"ghost":"primary")+'" onclick="mark(\''+c.id+'\',\''+(st==="present"?"absent":"present")+'\')">'+(st==="present"?"Mark absent":"I attended")+'</button></div></div>'}
+function renderToday(){let d=new Date().toISOString().slice(0,10),cs=classes.filter(c=>c.class_date===d);today.innerHTML='<h3>Today’s classes</h3>'+(cs.length?cs.map(classCard).join(""):'<div class="card"><b>No scheduled classes today.</b></div>')}
+function renderAttendance(){let rows=subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length;return '<tr><td><b>'+esc(s.name)+'</b></td><td>'+p+'</td><td>'+a+'</td><td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td><td>'+Math.max(0,(s.skip_allowance??s.credits)-a)+'</td></tr>'}).join("");attendance.innerHTML='<h3>My attendance summary</h3><div class="tablewrap"><table><thead><tr><th>Subject</th><th>Present</th><th>Absent</th><th>%</th><th>Skips left</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="margin-top:24px">Batch attendance</h3><div id="batch" class="card">Loading…</div>';loadBatch()}
+async function loadBatch(){let q=await sb.from("batch_attendance").select("*").order("student_id");if(q.error){batch.innerHTML='<div class="notice">Batch view needs the SQL patch to be run first.</div>';return}let g={};(q.data||[]).forEach(r=>(g[r.student_id]??=[]).push(r));let rows=Object.entries(g).map(([id,rs])=>{let p=rs.filter(x=>x.status==="present").length,a=rs.filter(x=>x.status==="absent").length,pc=p+a?Math.round(p/(p+a)*100):0;return '<tr><td>'+esc(id)+'</td><td>'+esc(rs[0].full_name)+'</td><td>'+p+'</td><td>'+a+'</td><td>'+pc+'%</td></tr>'}).join("");batch.innerHTML='<div class="tablewrap"><table><thead><tr><th>ID</th><th>Student</th><th>Present</th><th>Absent</th><th>%</th></tr></thead><tbody>'+rows+'</tbody></table></div>'}
+async function mark(classId,status){let q=await sb.from("attendance").upsert({student_id:me.id,class_id:classId,status,marked_at:new Date().toISOString()},{onConflict:"student_id,class_id"});if(q.error){alert(q.error.message);return}await load();render();tab("today")}
+function renderAdmin(){admin.innerHTML='<h3>Admin dashboard</h3><div class="grid"><div class="card"><div class="stat">'+profiles.length+'</div><div class="muted">Batch profiles</div></div><div class="card"><div class="stat">'+classes.length+'</div><div class="muted">Classes</div></div><div class="card"><div class="stat">'+subjects.length+'</div><div class="muted">Subjects</div></div></div><div class="card" style="margin-top:16px"><h3>Batch members</h3><div class="tablewrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>'+profiles.map(p=>'<tr><td>'+esc(p.student_id)+'</td><td>'+esc(p.full_name)+'</td><td>'+esc(p.email)+'</td><td>'+esc(p.role)+'</td></tr>').join("")+'</tbody></table></div></div><div class="notice">Admin timetable editing will be enabled in the next module after we verify the login and attendance flow.</div>'}
+(async()=>{let s=await sb.auth.getSession();if(s.data.session)await boot()})();</script></body></html>

@@ -18,8 +18,27 @@ function tab(x){["dash","today","attendance","admin"].forEach(y=>document.getEle
 function render(){welcome.innerHTML='<div class="row"><div><h2 style="margin:0">Hi, '+esc(profile.full_name.split(" ")[0])+' 👋</h2><div class="muted">'+esc(profile.student_id)+' · '+esc(profile.email)+'</div></div><b>'+profile.role.toUpperCase()+'</b></div>';renderDash();renderToday();renderAttendance();if(profile.role==="admin")renderAdmin()}
 function renderDash(){dash.innerHTML='<h3>My attendance</h3><div class="grid">'+subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length,allow=s.skip_allowance??s.credits;return '<div class="card"><b>'+esc(s.name)+'</b><div class="muted">'+s.credits+' credits</div><div class="stat">'+p+'/'+(p+a)+'</div><div class="muted">'+Math.max(0,allow-a)+' skip(s) remaining</div></div>'}).join("")+'</div>'}
 function classCard(c){let a=att(c.id),st=a?.status;return '<div class="class '+(st||"")+'"><div class="row"><div><div class="time">'+c.class_date+' · '+c.start_time.slice(0,5)+'–'+c.end_time.slice(0,5)+'</div><b>'+esc(c.subjects?.name||"Class")+'</b><div class="muted">Room: '+esc(c.room||"—")+' · Session '+(c.session_number||"—")+'</div>'+(st?'<div class="status '+(st==="present"?"ok":"bad")+'">'+st.toUpperCase()+'</div>':"")+'</div><button class="'+(st?"ghost":"primary")+'" onclick="mark(\''+c.id+'\',\''+(st==="present"?"absent":"present")+'\')">'+(st==="present"?"Mark absent":"I attended")+'</button></div></div>'}
-function renderToday(){let d=new Date().toISOString().slice(0,10),cs=classes.filter(c=>c.class_date===d);today.innerHTML='<h3>Today’s classes</h3>'+(cs.length?cs.map(classCard).join(""):'<div class="card"><b>No scheduled classes today.</b></div>')}
-function renderAttendance(){let rows=subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length;return '<tr><td><b>'+esc(s.name)+'</b></td><td>'+p+'</td><td>'+a+'</td><td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td><td>'+Math.max(0,(s.skip_allowance??s.credits)-a)+'</td></tr>'}).join("");attendance.innerHTML='<h3>My attendance summary</h3><div class="tablewrap"><table><thead><tr><th>Subject</th><th>Present</th><th>Absent</th><th>%</th><th>Skips left</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="margin-top:24px">Batch attendance</h3><div id="batch" class="card">Loading…</div>';loadBatch()}
+function renderToday(){
+  const todayDate = new Date();
+  const year = todayDate.getFullYear();
+  const month = String(todayDate.getMonth() + 1).padStart(2,"0");
+  const day = String(todayDate.getDate()).padStart(2,"0");
+  const dateString = `${year}-${month}-${day}`;
+
+  const todayClasses = classes.filter(
+    c => String(c.class_date).slice(0,10) === dateString
+  );
+
+  const todaySection = document.getElementById("today");
+
+  todaySection.innerHTML =
+    '<h3>Today’s classes</h3>' +
+    (
+      todayClasses.length
+      ? todayClasses.map(classCard).join("")
+      : '<div class="card"><b>No scheduled classes today.</b></div>'
+    );
+}function renderAttendance(){let rows=subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length;return '<tr><td><b>'+esc(s.name)+'</b></td><td>'+p+'</td><td>'+a+'</td><td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td><td>'+Math.max(0,(s.skip_allowance??s.credits)-a)+'</td></tr>'}).join("");attendance.innerHTML='<h3>My attendance summary</h3><div class="tablewrap"><table><thead><tr><th>Subject</th><th>Present</th><th>Absent</th><th>%</th><th>Skips left</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="margin-top:24px">Batch attendance</h3><div id="batch" class="card">Loading…</div>';loadBatch()}
 async function loadBatch(){let q=await sb.from("batch_attendance").select("*").order("student_id");if(q.error){batch.innerHTML='<div class="notice">Batch view needs the SQL patch to be run first.</div>';return}let g={};(q.data||[]).forEach(r=>(g[r.student_id]??=[]).push(r));let rows=Object.entries(g).map(([id,rs])=>{let p=rs.filter(x=>x.status==="present").length,a=rs.filter(x=>x.status==="absent").length,pc=p+a?Math.round(p/(p+a)*100):0;return '<tr><td>'+esc(id)+'</td><td>'+esc(rs[0].full_name)+'</td><td>'+p+'</td><td>'+a+'</td><td>'+pc+'%</td></tr>'}).join("");batch.innerHTML='<div class="tablewrap"><table><thead><tr><th>ID</th><th>Student</th><th>Present</th><th>Absent</th><th>%</th></tr></thead><tbody>'+rows+'</tbody></table></div>'}
 async function mark(classId,status){let q=await sb.from("attendance").upsert({student_id:me.id,class_id:classId,status,marked_at:new Date().toISOString()},{onConflict:"student_id,class_id"});if(q.error){alert(q.error.message);return}await load();render();tab("today")}
 function renderAdmin(){admin.innerHTML='<h3>Admin dashboard</h3><div class="grid"><div class="card"><div class="stat">'+profiles.length+'</div><div class="muted">Batch profiles</div></div><div class="card"><div class="stat">'+classes.length+'</div><div class="muted">Classes</div></div><div class="card"><div class="stat">'+subjects.length+'</div><div class="muted">Subjects</div></div></div><div class="card" style="margin-top:16px"><h3>Batch members</h3><div class="tablewrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>'+profiles.map(p=>'<tr><td>'+esc(p.student_id)+'</td><td>'+esc(p.full_name)+'</td><td>'+esc(p.email)+'</td><td>'+esc(p.role)+'</td></tr>').join("")+'</tbody></table></div></div><div class="notice">Admin timetable editing will be enabled in the next module after we verify the login and attendance flow.</div>'}

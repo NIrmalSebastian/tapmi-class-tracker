@@ -808,12 +808,23 @@ c.id+
 
 function renderToday(){
 
-const d=selectedClassDate;
+const panel=document.getElementById("today");
+
+const d=new Date(selectedClassDate);
 
 const dateString=
 d.getFullYear()+"-"+
 String(d.getMonth()+1).padStart(2,"0")+"-"+
 String(d.getDate()).padStart(2,"0");
+
+const now=new Date();
+
+const todayString=
+now.getFullYear()+"-"+
+String(now.getMonth()+1).padStart(2,"0")+"-"+
+String(now.getDate()).padStart(2,"0");
+
+const isToday=dateString===todayString;
 
 const displayDate=d.toLocaleDateString("en-IN",{
 weekday:"long",
@@ -822,20 +833,11 @@ month:"long",
 year:"numeric"
 });
 
-const today=new Date();
-
-const todayString=
-today.getFullYear()+"-"+
-String(today.getMonth()+1).padStart(2,"0")+"-"+
-String(today.getDate()).padStart(2,"0");
-
-const isToday=dateString===todayString;
-
 const dayClasses=classes.filter(
 c=>String(c.class_date).slice(0,10)===dateString
 );
 
-today.innerHTML=
+panel.innerHTML=
 
 '<div class="card">'+
 
@@ -875,9 +877,13 @@ dayClasses.map(classCard).join("")
 
 function changeClassDay(offset){
 
-selectedClassDate.setDate(
-selectedClassDate.getDate()+offset
+const d=new Date(selectedClassDate);
+
+d.setDate(
+d.getDate()+offset
 );
+
+selectedClassDate=d;
 
 renderToday();
 
@@ -891,6 +897,7 @@ selectedClassDate=new Date();
 renderToday();
 
 }
+
 
 
 /* ATTENDANCE */

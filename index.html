@@ -8,51 +8,285 @@
 
 <style>
 :root{
---bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#687386;
---line:#e5e9f0;--accent:#1f6feb;--ok:#14804a;--bad:#c62828;
+--bg:#f5f7fb;
+--card:#fff;
+--ink:#172033;
+--muted:#687386;
+--line:#e5e9f0;
+--accent:#1f6feb;
+--ok:#14804a;
+--bad:#c62828
 }
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:#0b1020;color:#fff;padding:18px 22px;position:sticky;top:0;z-index:10}
-.bar,.wrap{max-width:1180px;margin:auto}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-weight:800}.sub{font-size:12px;color:#b8c2d5;margin-top:3px}
+
+body{
+margin:0;
+font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+background:var(--bg);
+color:var(--ink)
+}
+
+header{
+background:#0b1020;
+color:#fff;
+padding:18px 22px;
+position:sticky;
+top:0;
+z-index:10
+}
+
+.bar,.wrap{
+max-width:1180px;
+margin:auto
+}
+
+.bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px
+}
+
+.brand{font-weight:800}
+
+.sub{
+font-size:12px;
+color:#b8c2d5;
+margin-top:3px
+}
+
 .wrap{padding:24px 16px}
-button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-button.primary{background:var(--accent);color:#fff}
-button.ghost{background:#eef3fb;color:#244}
-button.danger{background:#fff0f0;color:#b11}
-button.small{padding:7px 10px;font-size:12px}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 5px 18px #14213d08}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat{font-size:28px;font-weight:800}
+
+button{
+border:0;
+border-radius:10px;
+padding:10px 14px;
+font-weight:700;
+cursor:pointer
+}
+
+button.primary{
+background:var(--accent);
+color:#fff
+}
+
+button.ghost{
+background:#eef3fb;
+color:#244
+}
+
+button.danger{
+background:#fff0f0;
+color:#b11
+}
+
+button.small{
+padding:7px 10px;
+font-size:12px
+}
+
+.card{
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
+padding:18px;
+box-shadow:0 5px 18px #14213d08
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px
+}
+
+.stat{
+font-size:28px;
+font-weight:800
+}
+
 .muted{color:var(--muted)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tabs button.active{background:#0b1020;color:#fff}
-.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.class{border-left:5px solid var(--accent);margin:10px 0;padding:13px 14px;background:#fff;border-radius:12px;border:1px solid var(--line)}
-.class.present{border-left-color:var(--ok)}.class.absent{border-left-color:var(--bad)}
-.time{font-weight:800}.status{font-size:12px;font-weight:800}
-.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}
-table{width:100%;border-collapse:collapse;background:#fff}
-th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
-th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
-.login{max-width:430px;margin:70px auto}
-.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-.field input,.field select{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:10px;font:inherit}
-.notice,.err{padding:12px;border-radius:10px;margin:12px 0}
-.notice{background:#fff7df;color:#775500}.err{background:#fff0f0;color:#a11}
-.success{background:#edfff5;color:#12633c;padding:12px;border-radius:10px;margin:12px 0}
+
+.tabs{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin:18px 0
+}
+
+.tabs button.active{
+background:#0b1020;
+color:#fff
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px
+}
+
+.class{
+border-left:5px solid var(--accent);
+margin:10px 0;
+padding:13px 14px;
+background:#fff;
+border-radius:12px;
+border:1px solid var(--line)
+}
+
+.class.present{border-left-color:var(--ok)}
+.class.absent{border-left-color:var(--bad)}
+
+.time{font-weight:800}
+
+.status{
+font-size:12px;
+font-weight:800
+}
+
+.status.ok{color:var(--ok)}
+.status.bad{color:var(--bad)}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid var(--line);
+text-align:left;
+font-size:14px
+}
+
+th{background:#f7f9fc}
+
+.tablewrap{
+overflow:auto;
+border:1px solid var(--line);
+border-radius:12px
+}
+
+.login{
+max-width:430px;
+margin:70px auto
+}
+
+.field{margin:12px 0}
+
+.field label{
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:6px
+}
+
+.field input,
+.field select,
+.field textarea{
+width:100%;
+padding:11px;
+border:1px solid #ccd3df;
+border-radius:10px;
+font:inherit
+}
+
+.field textarea{
+min-height:100px;
+resize:vertical
+}
+
+.notice,.err,.success{
+padding:12px;
+border-radius:10px;
+margin:12px 0
+}
+
+.notice{
+background:#fff7df;
+color:#775500
+}
+
+.err{
+background:#fff0f0;
+color:#a11
+}
+
+.success{
+background:#edfff5;
+color:#12633c
+}
+
 .hidden{display:none!important}
-.adminnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.adminnav button.active{background:#0b1020;color:#fff}
-.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.formgrid .wide{grid-column:span 2}
-.section{margin-top:18px}
+
+.adminnav{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:16px
+}
+
+.adminnav button.active{
+background:#0b1020;
+color:#fff
+}
+
+.formgrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px
+}
+
+.formgrid .wide{
+grid-column:span 2
+}
+
+.section{
+margin-top:18px
+}
+
+.event{
+border-left:5px solid #7c4dff;
+margin:10px 0;
+padding:14px;
+background:#fff;
+border-radius:12px;
+border:1px solid var(--line)
+}
+
+.announcement{
+border-left:5px solid #ff9800;
+margin:10px 0;
+padding:14px;
+background:#fff;
+border-radius:12px;
+border:1px solid var(--line)
+}
+
+.badge{
+display:inline-block;
+padding:4px 8px;
+border-radius:999px;
+font-size:11px;
+font-weight:800;
+background:#eef3fb
+}
+
 @media(max-width:800px){
-.grid,.formgrid{grid-template-columns:1fr}
-.formgrid .wide{grid-column:span 1}
-.row{align-items:flex-start;flex-direction:column}
+.grid,.formgrid{
+grid-template-columns:1fr
+}
+
+.formgrid .wide{
+grid-column:span 1
+}
+
+.row{
+align-items:flex-start;
+flex-direction:column
+}
 }
 </style>
 </head>
@@ -61,19 +295,28 @@ th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);bord
 
 <header>
 <div class="bar">
+
 <div>
 <div class="brand">TAPMI Class Tracker</div>
 <div class="sub">MBA-AI&DS (2025–2027) • Term 5</div>
 </div>
+
 <div id="account"></div>
+
 </div>
 </header>
+
 
 <main class="wrap">
 
 <section id="login" class="login card">
+
 <h2>Batch login</h2>
-<p class="muted">Use your Manipal learner email and your Supabase password.</p>
+
+<p class="muted">
+Use your Manipal learner email and your Supabase password.
+</p>
+
 <div id="loginErr" class="err hidden"></div>
 
 <div class="field">
@@ -87,6 +330,7 @@ th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);bord
 </div>
 
 <button class="primary" onclick="doLogin()">Sign in</button>
+
 </section>
 
 
@@ -94,17 +338,50 @@ th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);bord
 
 <div id="welcome" class="card"></div>
 
+
 <div class="tabs">
-<button id="dashBtn" class="active" onclick="tab('dash')">Dashboard</button>
-<button onclick="tab('today')">Today's classes</button>
-<button onclick="tab('attendance')">Batch attendance</button>
-<button id="adminBtn" class="hidden" onclick="tab('admin')">Admin</button>
-<button class="ghost" onclick="doLogout()">Sign out</button>
+
+<button id="dashBtn" class="active" onclick="tab('dash')">
+Dashboard
+</button>
+
+<button onclick="tab('today')">
+Today's classes
+</button>
+
+<button onclick="tab('attendance')">
+Batch attendance
+</button>
+
+<button onclick="tab('events')">
+Events
+</button>
+
+<button onclick="tab('announcements')">
+Announcements
+</button>
+
+<button id="adminBtn" class="hidden" onclick="tab('admin')">
+Admin
+</button>
+
+<button class="ghost" onclick="doLogout()">
+Sign out
+</button>
+
 </div>
 
+
 <div id="dash"></div>
+
 <div id="today" class="hidden"></div>
+
 <div id="attendance" class="hidden"></div>
+
+<div id="events" class="hidden"></div>
+
+<div id="announcements" class="hidden"></div>
+
 <div id="admin" class="hidden"></div>
 
 </section>
@@ -122,17 +399,41 @@ TAPMI_CONFIG.supabaseUrl,
 TAPMI_CONFIG.supabasePublishableKey
 );
 
-let me,profile,subjects=[],classes=[],mine=[],profiles=[];
+
+let me;
+let profile;
+
+let subjects=[];
+let classes=[];
+let mine=[];
+let profiles=[];
+
+let eventsData=[];
+let announcementsData=[];
+
 let adminSection="students";
+let editingClassId=null;
+let editingEventId=null;
 
 
 const esc=s=>String(s??"").replace(
 /[&<>"']/g,
-m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[m])
 );
 
-const att=id=>mine.find(x=>x.class_id===id);
 
+const att=id=>mine.find(
+x=>x.class_id===id
+);
+
+
+/* LOGIN */
 
 async function doLogin(){
 
@@ -144,57 +445,83 @@ password:password.value
 });
 
 if(r.error){
+
 loginErr.textContent=r.error.message;
+
 loginErr.classList.remove("hidden");
+
 return;
 }
 
 await boot();
+
 }
 
 
 async function doLogout(){
+
 await sb.auth.signOut();
+
 location.reload();
+
 }
 
+
+/* BOOT */
 
 async function boot(){
 
 let u=await sb.auth.getUser();
+
 me=u.data.user;
 
 if(!me)return;
+
 
 let p=await sb.from("profiles")
 .select("*")
 .eq("id",me.id)
 .single();
 
+
 if(p.error){
-loginErr.textContent="Login works, but your profile is not linked. Contact an admin.";
+
+loginErr.textContent=
+"Login works, but your profile is not linked. Contact an admin.";
+
 loginErr.classList.remove("hidden");
+
 return;
+
 }
+
 
 profile=p.data;
 
 login.classList.add("hidden");
+
 app.classList.remove("hidden");
 
-account.textContent=profile.full_name+" · "+profile.role;
+account.textContent=
+profile.full_name+" · "+profile.role;
+
 
 if(profile.role==="admin")
 adminBtn.classList.remove("hidden");
 
+
 await load();
+
 render();
+
 }
 
 
+/* LOAD DATA */
+
 async function load(){
 
-let [s,c,a]=await Promise.all([
+let results=await Promise.all([
 
 sb.from("subjects")
 .select("*")
@@ -207,20 +534,58 @@ sb.from("classes")
 
 sb.from("attendance")
 .select("*")
-.eq("student_id",me.id)
+.eq("student_id",me.id),
+
+sb.from("events")
+.select("*")
+.order("event_date"),
+
+sb.from("announcements")
+.select("*")
+.order("created_at",{ascending:false})
 
 ]);
 
-if(s.error||c.error||a.error){
 
-alert((s.error||c.error||a.error).message);
+let s=results[0];
+let c=results[1];
+let a=results[2];
+let e=results[3];
+let n=results[4];
+
+
+if(s.error||c.error||a.error||e.error||n.error){
+
+console.log(
+s.error,
+c.error,
+a.error,
+e.error,
+n.error
+);
+
+alert(
+(s.error||
+c.error||
+a.error||
+e.error||
+n.error).message
+);
+
 return;
 
 }
 
+
 subjects=s.data||[];
+
 classes=c.data||[];
+
 mine=a.data||[];
+
+eventsData=e.data||[];
+
+announcementsData=n.data||[];
 
 
 if(profile.role==="admin"){
@@ -236,20 +601,40 @@ profiles=p.data||[];
 }
 
 
+/* TABS */
+
 function tab(x){
 
-["dash","today","attendance","admin"]
-.forEach(y=>{
-document.getElementById(y).classList.toggle("hidden",x!==y)
+[
+"dash",
+"today",
+"attendance",
+"events",
+"announcements",
+"admin"
+].forEach(y=>{
+
+document.getElementById(y)
+.classList.toggle("hidden",x!==y);
+
 });
+
 
 document.querySelectorAll(".tabs button")
 .forEach(b=>b.classList.remove("active"));
 
-if(x==="dash")dashBtn.classList.add("active");
+
+if(x==="dash")
+dashBtn.classList.add("active");
+
+
+if(x==="admin")
+renderAdmin();
 
 }
 
+
+/* RENDER EVERYTHING */
 
 function render(){
 
@@ -260,16 +645,23 @@ welcome.innerHTML=
 esc(profile.full_name.split(" ")[0])+
 ' 👋</h2>'+
 '<div class="muted">'+
-esc(profile.student_id)+" · "+
+esc(profile.student_id)+
+' · '+
 esc(profile.email)+
 '</div>'+
 '</div>'+
-'<b>'+profile.role.toUpperCase()+'</b>'+
+'<b>'+
+profile.role.toUpperCase()+
+'</b>'+
 '</div>';
+
 
 renderDash();
 renderToday();
 renderAttendance();
+renderEvents();
+renderAnnouncements();
+
 
 if(profile.role==="admin")
 renderAdmin();
@@ -277,21 +669,23 @@ renderAdmin();
 }
 
 
+/* DASHBOARD */
+
 function renderDash(){
 
-dash.innerHTML=
-'<h3>My attendance</h3>'+
-'<div class="grid">'+
+let cards=subjects.map(s=>{
 
-subjects.map(s=>{
+let cs=classes.filter(
+c=>c.subject_id===s.id
+);
 
-let cs=classes.filter(c=>c.subject_id===s.id);
+let p=cs.filter(
+c=>att(c.id)?.status==="present"
+).length;
 
-let p=cs.filter(c=>
-att(c.id)?.status==="present").length;
-
-let a=cs.filter(c=>
-att(c.id)?.status==="absent").length;
+let a=cs.filter(
+c=>att(c.id)?.status==="absent"
+).length;
 
 let allow=s.skip_allowance??s.credits;
 
@@ -301,18 +695,47 @@ return '<div class="card">'+
 '<div class="stat">'+p+'/'+(p+a)+'</div>'+
 '<div class="muted">'+
 Math.max(0,allow-a)+
-' skip(s) remaining</div>'+
+' skip(s) remaining'+
+'</div>'+
 '</div>';
 
-}).join("")+
-'</div>';
+}).join("");
+
+
+let activeAnnouncements=
+announcementsData.filter(a=>a.active);
+
+
+let announcementHtml=
+activeAnnouncements.length
+?
+'<h3>📢 Announcements</h3>'+
+activeAnnouncements.slice(0,3).map(a=>
+'<div class="announcement">'+
+'<b>'+esc(a.title)+'</b>'+
+'<p>'+esc(a.body)+'</p>'+
+'</div>'
+).join("")
+:
+'';
+
+
+dash.innerHTML=
+'<h3>My attendance</h3>'+
+'<div class="grid">'+
+cards+
+'</div>'+
+announcementHtml;
 
 }
 
 
+/* TODAY */
+
 function classCard(c){
 
 let a=att(c.id);
+
 let st=a?.status;
 
 return '<div class="class '+(st||"")+'">'+
@@ -358,7 +781,9 @@ c.id+
 (st==="present"?"absent":"present")+
 '\')">'+
 
-(st==="present"?"Mark absent":"I attended")+
+(st==="present"?
+"Mark absent":
+"I attended")+
 
 '</button>'+
 
@@ -377,42 +802,62 @@ d.getFullYear()+"-"+
 String(d.getMonth()+1).padStart(2,"0")+"-"+
 String(d.getDate()).padStart(2,"0");
 
+
 const todayClasses=classes.filter(
 c=>String(c.class_date).slice(0,10)===dateString
 );
+
 
 today.innerHTML=
 '<h3>Today’s classes</h3>'+
 (
 todayClasses.length
-?todayClasses.map(classCard).join("")
-:'<div class="card"><b>No scheduled classes today.</b></div>'
+?
+todayClasses.map(classCard).join("")
+:
+'<div class="card"><b>No scheduled classes today.</b></div>'
 );
 
 }
 
 
+/* ATTENDANCE */
+
 function renderAttendance(){
 
 let rows=subjects.map(s=>{
 
-let cs=classes.filter(c=>c.subject_id===s.id);
+let cs=classes.filter(
+c=>c.subject_id===s.id
+);
 
-let p=cs.filter(c=>att(c.id)?.status==="present").length;
+let p=cs.filter(
+c=>att(c.id)?.status==="present"
+).length;
 
-let a=cs.filter(c=>att(c.id)?.status==="absent").length;
+let a=cs.filter(
+c=>att(c.id)?.status==="absent"
+).length;
+
 
 return '<tr>'+
 '<td><b>'+esc(s.name)+'</b></td>'+
 '<td>'+p+'</td>'+
 '<td>'+a+'</td>'+
-'<td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td>'+
 '<td>'+
-Math.max(0,(s.skip_allowance??s.credits)-a)+
+((p+a)?
+Math.round(p/(p+a)*100):0)+
+'%</td>'+
+'<td>'+
+Math.max(
+0,
+(s.skip_allowance??s.credits)-a
+)+
 '</td>'+
 '</tr>';
 
 }).join("");
+
 
 attendance.innerHTML=
 '<h3>My attendance summary</h3>'+
@@ -425,12 +870,15 @@ attendance.innerHTML=
 '<th>%</th>'+
 '<th>Skips left</th>'+
 '</tr></thead>'+
-'<tbody>'+rows+'</tbody>'+
+'<tbody>'+
+rows+
+'</tbody>'+
 '</table>'+
 '</div>'+
 
 '<h3 style="margin-top:24px">Batch attendance</h3>'+
 '<div id="batch" class="card">Loading…</div>';
+
 
 loadBatch();
 
@@ -443,6 +891,7 @@ let q=await sb.from("batch_attendance")
 .select("*")
 .order("student_id");
 
+
 if(q.error){
 
 batch.innerHTML=
@@ -454,11 +903,13 @@ return;
 
 }
 
+
 let g={};
 
 (q.data||[]).forEach(
 r=>(g[r.student_id]??=[]).push(r)
 );
+
 
 let rows=Object.entries(g).map(
 ([id,rs])=>{
@@ -474,6 +925,7 @@ x=>x.status==="absent"
 let pc=p+a?
 Math.round(p/(p+a)*100):0;
 
+
 return '<tr>'+
 '<td>'+esc(id)+'</td>'+
 '<td>'+esc(rs[0].full_name)+'</td>'+
@@ -483,6 +935,7 @@ return '<tr>'+
 '</tr>';
 
 }).join("");
+
 
 batch.innerHTML=
 '<div class="tablewrap">'+
@@ -494,16 +947,21 @@ batch.innerHTML=
 '<th>Absent</th>'+
 '<th>%</th>'+
 '</tr></thead>'+
-'<tbody>'+rows+'</tbody>'+
+'<tbody>'+
+rows+
+'</tbody>'+
 '</table>'+
 '</div>';
 
 }
 
 
+/* ATTENDANCE MARK */
+
 async function mark(classId,status){
 
-let q=await sb.from("attendance").upsert({
+let q=await sb.from("attendance")
+.upsert({
 
 student_id:me.id,
 class_id:classId,
@@ -512,51 +970,133 @@ marked_at:new Date().toISOString()
 
 },{onConflict:"student_id,class_id"});
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
 
+
 await load();
+
 render();
+
 tab("today");
 
 }
 
 
-/* =========================================
-   ADMIN PANEL
-========================================= */
+/* EVENTS FOR STUDENTS */
 
+function renderEvents(){
+
+let sorted=[...eventsData]
+.sort((a,b)=>
+String(a.event_date).localeCompare(
+String(b.event_date)
+));
+
+
+events.innerHTML=
+'<h3>🗓️ Events & Holidays</h3>'+
+(
+sorted.length
+?
+sorted.map(e=>
+'<div class="event">'+
+
+'<div class="row">'+
+
+'<div>'+
+'<span class="badge">'+
+esc(e.event_type||"Event")+
+'</span>'+
+
+'<h3 style="margin:8px 0">'+
+esc(e.title)+
+'</h3>'+
+
+'<div class="muted">'+
+esc(e.event_date)+
+'</div>'+
+
+(e.description?
+'<p>'+esc(e.description)+'</p>':
+"")+
+
+'</div>'+
+
+'</div>'+
+
+'</div>'
+).join("")
+:
+'<div class="card">No events or holidays added yet.</div>'
+);
+
+}
+
+
+/* ANNOUNCEMENTS FOR STUDENTS */
+
+function renderAnnouncements(){
+
+let active=announcementsData
+.filter(a=>a.active);
+
+
+announcements.innerHTML=
+'<h3>📢 Announcements</h3>'+
+(
+active.length
+?
+active.map(a=>
+'<div class="announcement">'+
+'<h3 style="margin:0 0 8px">'+
+esc(a.title)+
+'</h3>'+
+'<p>'+
+esc(a.body)+
+'</p>'+
+'<div class="muted">'+
+new Date(a.created_at).toLocaleString()+
+'</div>'+
+'</div>'
+).join("")
+:
+'<div class="card">No active announcements.</div>'
+);
+
+}
+
+
+/* =========================================
+   ADMIN
+========================================= */
 
 function renderAdmin(){
 
 admin.innerHTML=
 
 '<h2>Admin Panel</h2>'+
-'<p class="muted">Manage students, subjects, timetable and attendance.</p>'+
+'<p class="muted">Manage students, subjects, timetable, attendance, events and announcements.</p>'+
 
 '<div class="adminnav">'+
 
-'<button class="'+
-(adminSection==="students"?"active":"")+
-'" onclick="adminSection=\'students\';renderAdmin()">Students</button>'+
-
-'<button class="'+
-(adminSection==="subjects"?"active":"")+
-'" onclick="adminSection=\'subjects\';renderAdmin()">Subjects</button>'+
-
-'<button class="'+
-(adminSection==="classes"?"active":"")+
-'" onclick="adminSection=\'classes\';renderAdmin()">Timetable</button>'+
-
-'<button class="'+
-(adminSection==="attendance"?"active":"")+
-'" onclick="adminSection=\'attendance\';renderAdmin()">Attendance</button>'+
+adminButton("students","Students")+
+adminButton("subjects","Subjects")+
+adminButton("classes","Timetable")+
+adminButton("attendance","Attendance")+
+adminButton("events","Events")+
+adminButton("announcements","Announcements")+
 
 '</div>'+
 
 '<div id="adminContent"></div>';
+
 
 if(adminSection==="students")
 renderAdminStudents();
@@ -570,6 +1110,25 @@ renderAdminClasses();
 if(adminSection==="attendance")
 renderAdminAttendance();
 
+if(adminSection==="events")
+renderAdminEvents();
+
+if(adminSection==="announcements")
+renderAdminAnnouncements();
+
+}
+
+
+function adminButton(id,label){
+
+return '<button class="'+
+(adminSection===id?"active":"")+
+'" onclick="adminSection=\''+
+id+
+'\';renderAdmin()">'+
+label+
+'</button>';
+
 }
 
 
@@ -577,11 +1136,16 @@ renderAdminAttendance();
 
 function renderAdminStudents(){
 
-let html=
+document.getElementById("adminContent").innerHTML=
 
 '<div class="card">'+
+
 '<h3>Batch Students</h3>'+
-'<p class="muted">There are '+profiles.length+' registered profiles.</p>'+
+
+'<p class="muted">'+
+profiles.length+
+' registered profiles.'+
+'</p>'+
 
 '<div class="tablewrap">'+
 '<table>'+
@@ -612,7 +1176,8 @@ profiles.map(p=>
 '</td>'+
 '<td>'+
 '<button class="small primary" onclick="changeRole(\''+
-p.id+'\')">Save</button>'+
+p.id+
+'\')">Save</button>'+
 '</td>'+
 '</tr>'
 
@@ -623,30 +1188,39 @@ p.id+'\')">Save</button>'+
 '</div>'+
 '</div>';
 
-document.getElementById("adminContent").innerHTML=html;
-
 }
 
 
 async function changeRole(id){
 
-let value=document.getElementById("role_"+id).value;
+let value=
+document.getElementById("role_"+id).value;
 
-if(!confirm("Change this user's role to "+value+"?"))
+
+if(!confirm(
+"Change this user's role to "+value+"?"
+))
 return;
+
 
 let q=await sb.from("profiles")
 .update({role:value})
 .eq("id",id);
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
+
 
 alert("Role updated successfully.");
 
 await load();
+
 renderAdmin();
 
 }
@@ -656,9 +1230,10 @@ renderAdmin();
 
 function renderAdminSubjects(){
 
-let html=
+document.getElementById("adminContent").innerHTML=
 
 '<div class="card">'+
+
 '<h3>Add Subject</h3>'+
 
 '<div class="formgrid">'+
@@ -681,10 +1256,13 @@ let html=
 '</div>'+
 
 '<button class="primary" onclick="addSubject()">Add subject</button>'+
+
 '</div>'+
 
 '<div class="card section">'+
+
 '<h3>Existing Subjects</h3>'+
+
 '<div class="tablewrap">'+
 '<table>'+
 '<thead><tr>'+
@@ -693,24 +1271,37 @@ let html=
 '<th>Skip allowance</th>'+
 '<th>Action</th>'+
 '</tr></thead>'+
+
 '<tbody>'+
 
 subjects.map(s=>
 
 '<tr>'+
 '<td>'+esc(s.name)+'</td>'+
+
 '<td>'+
-'<input id="credit_'+s.id+'" type="number" value="'+s.credits+'" style="width:80px">'+
+'<input id="credit_'+s.id+
+'" type="number" value="'+s.credits+
+'" style="width:80px">'+
 '</td>'+
+
 '<td>'+
-'<input id="skip_'+s.id+'" type="number" value="'+(s.skip_allowance??s.credits)+'" style="width:80px">'+
+'<input id="skip_'+s.id+
+'" type="number" value="'+
+(s.skip_allowance??s.credits)+
+'" style="width:80px">'+
 '</td>'+
+
 '<td>'+
 '<button class="small primary" onclick="saveSubject(\''+
-s.id+'\')">Save</button> '+
+s.id+
+'\')">Save</button> '+
+
 '<button class="small danger" onclick="deleteSubject(\''+
-s.id+'\')">Delete</button>'+
+s.id+
+'\')">Delete</button>'+
 '</td>'+
+
 '</tr>'
 
 ).join("")+
@@ -720,14 +1311,14 @@ s.id+'\')">Delete</button>'+
 '</div>'+
 '</div>';
 
-document.getElementById("adminContent").innerHTML=html;
-
 }
 
 
 async function addSubject(){
 
-let name=document.getElementById("newSubName").value.trim();
+let name=
+document.getElementById("newSubName")
+.value.trim();
 
 let credits=Number(
 document.getElementById("newSubCredits").value
@@ -737,27 +1328,37 @@ let skip=Number(
 document.getElementById("newSubSkip").value
 );
 
+
 if(!name){
+
 alert("Enter a subject name.");
+
 return;
+
 }
 
-let q=await sb.from("subjects").insert({
 
+let q=await sb.from("subjects")
+.insert({
 name:name,
 credits:credits,
 skip_allowance:skip
-
 });
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
+
 
 alert("Subject added.");
 
 await load();
+
 renderAdmin();
 
 }
@@ -773,6 +1374,7 @@ let skip=Number(
 document.getElementById("skip_"+id).value
 );
 
+
 let q=await sb.from("subjects")
 .update({
 credits:credits,
@@ -780,15 +1382,22 @@ skip_allowance:skip
 })
 .eq("id",id);
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
+
 
 alert("Subject updated.");
 
 await load();
+
 render();
+
 tab("admin");
 
 }
@@ -801,75 +1410,122 @@ if(!confirm(
 ))
 return;
 
+
 let q=await sb.from("subjects")
 .delete()
 .eq("id",id);
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
 
+
 await load();
+
 renderAdmin();
 
 }
 
 
-/* TIMETABLE */
+/* =========================================
+   TIMETABLE
+========================================= */
 
 function renderAdminClasses(){
 
-let html=
+let editClass=editingClassId?
+classes.find(c=>c.id===editingClassId):
+null;
+
+
+let subjectOptions=subjects.map(s=>
+'<option value="'+s.id+'" '+
+(editClass?.subject_id===s.id?"selected":"")+
+'>'+
+esc(s.name)+
+'</option>'
+).join("");
+
+
+document.getElementById("adminContent").innerHTML=
 
 '<div class="card">'+
-'<h3>Add Class</h3>'+
+
+'<h3>'+
+(editClass?"Edit Class":"Add Class")+
+'</h3>'+
+
+(editClass?
+'<div class="notice">You are editing an existing class.</div>':
+"")+
 
 '<div class="formgrid">'+
 
 '<div class="field wide">'+
 '<label>Subject</label>'+
-'<select id="newClassSubject">'+
-subjects.map(s=>
-'<option value="'+s.id+'">'+
-esc(s.name)+
-'</option>'
-).join("")+
+'<select id="classSubject">'+
+subjectOptions+
 '</select>'+
 '</div>'+
 
 '<div class="field">'+
 '<label>Date</label>'+
-'<input id="newClassDate" type="date">'+
+'<input id="classDate" type="date" value="'+
+(editClass?.class_date||"")+
+'">'+
 '</div>'+
 
 '<div class="field">'+
 '<label>Start time</label>'+
-'<input id="newClassStart" type="time">'+
+'<input id="classStart" type="time" value="'+
+(editClass?.start_time?.slice(0,5)||"")+
+'">'+
 '</div>'+
 
 '<div class="field">'+
 '<label>End time</label>'+
-'<input id="newClassEnd" type="time">'+
+'<input id="classEnd" type="time" value="'+
+(editClass?.end_time?.slice(0,5)||"")+
+'">'+
 '</div>'+
 
 '<div class="field">'+
 '<label>Room</label>'+
-'<input id="newClassRoom" placeholder="BS 03">'+
+'<input id="classRoom" value="'+
+esc(editClass?.room||"")+
+'">'+
 '</div>'+
 
 '<div class="field">'+
 '<label>Session number</label>'+
-'<input id="newClassSession" type="number" min="1">'+
+'<input id="classSession" type="number" min="1" value="'+
+(editClass?.session_number||"")+
+'">'+
 '</div>'+
 
 '</div>'+
 
-'<button class="primary" onclick="addClass()">Add class</button>'+
+'<button class="primary" onclick="saveClass()">'+
+(editClass?"Update class":"Add class")+
+'</button> '+
+
+(editClass?
+'<button class="ghost" onclick="cancelClassEdit()">Cancel</button>':
+"")+
+
 '</div>'+
 
 '<div class="card section">'+
-'<h3>Scheduled Classes</h3>'+
+
+'<h3>Scheduled Classes ('+
+classes.length+
+')</h3>'+
+
 '<div class="tablewrap">'+
 '<table>'+
 '<thead><tr>'+
@@ -880,24 +1536,42 @@ esc(s.name)+
 '<th>Session</th>'+
 '<th>Action</th>'+
 '</tr></thead>'+
+
 '<tbody>'+
 
 classes.map(c=>
 
 '<tr>'+
 '<td>'+esc(c.class_date)+'</td>'+
+
 '<td>'+
 esc(c.start_time.slice(0,5))+
 '–'+
 esc(c.end_time.slice(0,5))+
 '</td>'+
-'<td>'+esc(c.subjects?.name||"")+'</td>'+
-'<td>'+esc(c.room||"")+'</td>'+
-'<td>'+esc(c.session_number||"")+'</td>'+
+
 '<td>'+
-'<button class="small danger" onclick="deleteClass(\''+
-c.id+'\')">Delete</button>'+
+esc(c.subjects?.name||"")+
 '</td>'+
+
+'<td>'+
+esc(c.room||"")+
+'</td>'+
+
+'<td>'+
+esc(c.session_number||"")+
+'</td>'+
+
+'<td>'+
+'<button class="small primary" onclick="editClass(\''+
+c.id+
+'\')">Edit</button> '+
+
+'<button class="small danger" onclick="deleteClass(\''+
+c.id+
+'\')">Delete</button>'+
+'</td>'+
+
 '</tr>'
 
 ).join("")+
@@ -907,71 +1581,139 @@ c.id+'\')">Delete</button>'+
 '</div>'+
 '</div>';
 
-document.getElementById("adminContent").innerHTML=html;
+}
+
+
+function editClass(id){
+
+editingClassId=id;
+
+renderAdmin();
 
 }
 
 
-async function addClass(){
+function cancelClassEdit(){
 
-let subject_id=document.getElementById("newClassSubject").value;
+editingClassId=null;
 
-let class_date=document.getElementById("newClassDate").value;
+renderAdmin();
 
-let start_time=document.getElementById("newClassStart").value;
+}
 
-let end_time=document.getElementById("newClassEnd").value;
 
-let room=document.getElementById("newClassRoom").value.trim();
+async function saveClass(){
+
+let subject_id=
+document.getElementById("classSubject").value;
+
+let class_date=
+document.getElementById("classDate").value;
+
+let start_time=
+document.getElementById("classStart").value;
+
+let end_time=
+document.getElementById("classEnd").value;
+
+let room=
+document.getElementById("classRoom").value.trim();
 
 let session_number=Number(
-document.getElementById("newClassSession").value
+document.getElementById("classSession").value
 );
 
-if(!subject_id||!class_date||!start_time||!end_time){
+
+if(!subject_id||
+!class_date||
+!start_time||
+!end_time){
+
 alert("Please fill subject, date and times.");
+
 return;
+
 }
 
-let q=await sb.from("classes").insert({
 
+let data={
 subject_id:subject_id,
 class_date:class_date,
 start_time:start_time,
 end_time:end_time,
 room:room||null,
 session_number:session_number||null
+};
 
-});
 
-if(q.error){
-alert(q.error.message);
-return;
+let q;
+
+
+if(editingClassId){
+
+q=await sb.from("classes")
+.update(data)
+.eq("id",editingClassId);
+
+}else{
+
+q=await sb.from("classes")
+.insert(data);
+
 }
 
-alert("Class added successfully.");
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+alert(
+editingClassId?
+"Class updated successfully.":
+"Class added successfully."
+);
+
+
+editingClassId=null;
 
 await load();
-renderAdmin();
+
+render();
+
+tab("admin");
 
 }
 
 
 async function deleteClass(id){
 
-if(!confirm("Delete this class from the timetable?"))
+if(!confirm(
+"Delete this class from the timetable?"
+))
 return;
+
 
 let q=await sb.from("classes")
 .delete()
 .eq("id",id);
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
 
+
 await load();
+
 renderAdmin();
 
 }
@@ -983,24 +1725,33 @@ function renderAdminAttendance(){
 
 let options=profiles.map(p=>
 '<option value="'+p.id+'">'+
-esc(p.student_id)+" — "+
+esc(p.student_id)+
+" — "+
 esc(p.full_name)+
 '</option>'
 ).join("");
 
+
 let classOptions=classes.map(c=>
 '<option value="'+c.id+'">'+
-esc(c.class_date)+" · "+
-esc(c.subjects?.name||"Class")+" · "+
+esc(c.class_date)+
+" · "+
+esc(c.subjects?.name||"Class")+
+" · "+
 esc(c.start_time.slice(0,5))+
 '</option>'
 ).join("");
 
+
 document.getElementById("adminContent").innerHTML=
 
 '<div class="card">'+
+
 '<h3>Attendance Correction</h3>'+
-'<p class="muted">Use this when an attendance record needs to be corrected.</p>'+
+
+'<p class="muted">'+
+'Use this when an attendance record needs to be corrected.'+
+'</p>'+
 
 '<div class="formgrid">'+
 
@@ -1028,7 +1779,9 @@ classOptions+
 
 '</div>'+
 
-'<button class="primary" onclick="adminSetAttendance()">Save attendance</button>'+
+'<button class="primary" onclick="adminSetAttendance()">'+
+'Save attendance'+
+'</button>'+
 
 '</div>';
 
@@ -1037,13 +1790,27 @@ classOptions+
 
 async function adminSetAttendance(){
 
-let student_id=document.getElementById("attStudent").value;
+let student_id=
+document.getElementById("attStudent").value;
 
-let class_id=document.getElementById("attClass").value;
+let class_id=
+document.getElementById("attClass").value;
 
-let status=document.getElementById("attStatus").value;
+let status=
+document.getElementById("attStatus").value;
 
-let q=await sb.from("attendance").upsert({
+
+if(!student_id||!class_id){
+
+alert("Select a student and class.");
+
+return;
+
+}
+
+
+let q=await sb.from("attendance")
+.upsert({
 
 student_id:student_id,
 class_id:class_id,
@@ -1052,14 +1819,20 @@ marked_at:new Date().toISOString()
 
 },{onConflict:"student_id,class_id"});
 
+
 if(q.error){
+
 alert(q.error.message);
+
 return;
+
 }
+
 
 alert("Attendance corrected successfully.");
 
 await load();
+
 render();
 
 tab("admin");
@@ -1067,7 +1840,453 @@ tab("admin");
 }
 
 
-/* START */
+/* =========================================
+   EVENTS / HOLIDAYS ADMIN
+========================================= */
+
+function renderAdminEvents(){
+
+let editEvent=editingEventId?
+eventsData.find(e=>e.id===editingEventId):
+null;
+
+
+document.getElementById("adminContent").innerHTML=
+
+'<div class="card">'+
+
+'<h3>'+
+(editEvent?"Edit Event":"Add Event / Holiday")+
+'</h3>'+
+
+(editEvent?
+'<div class="notice">Editing existing event.</div>':
+"")+
+
+'<div class="formgrid">'+
+
+'<div class="field">'+
+'<label>Date</label>'+
+'<input id="eventDate" type="date" value="'+
+(editEvent?.event_date||"")+
+'">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Type</label>'+
+'<select id="eventType">'+
+
+'<option value="Holiday" '+
+(editEvent?.event_type==="Holiday"?"selected":"")+
+'>Holiday</option>'+
+
+'<option value="Event" '+
+(editEvent?.event_type==="Event"?"selected":"")+
+'>Event</option>'+
+
+'<option value="Academic" '+
+(editEvent?.event_type==="Academic"?"selected":"")+
+'>Academic</option>'+
+
+'<option value="Other" '+
+(editEvent?.event_type==="Other"?"selected":"")+
+'>Other</option>'+
+
+'</select>'+
+'</div>'+
+
+'<div class="field wide">'+
+'<label>Title</label>'+
+'<input id="eventTitle" value="'+
+esc(editEvent?.title||"")+
+'" placeholder="Example: Gandhi Jayanthi">'+
+'</div>'+
+
+'<div class="field wide">'+
+'<label>Description</label>'+
+'<textarea id="eventDescription">'+
+esc(editEvent?.description||"")+
+'</textarea>'+
+'</div>'+
+
+'</div>'+
+
+'<button class="primary" onclick="saveEvent()">'+
+(editEvent?"Update event":"Add event")+
+'</button> '+
+
+(editEvent?
+'<button class="ghost" onclick="cancelEventEdit()">Cancel</button>':
+"")+
+
+'</div>'+
+
+'<div class="card section">'+
+
+'<h3>Events & Holidays</h3>'+
+
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>Date</th>'+
+'<th>Type</th>'+
+'<th>Title</th>'+
+'<th>Description</th>'+
+'<th>Action</th>'+
+'</tr></thead>'+
+
+'<tbody>'+
+
+eventsData.map(e=>
+
+'<tr>'+
+'<td>'+esc(e.event_date)+'</td>'+
+'<td>'+esc(e.event_type||"")+'</td>'+
+'<td>'+esc(e.title)+'</td>'+
+'<td>'+esc(e.description||"")+'</td>'+
+'<td>'+
+
+'<button class="small primary" onclick="editEvent(\''+
+e.id+
+'\')">Edit</button> '+
+
+'<button class="small danger" onclick="deleteEvent(\''+
+e.id+
+'\')">Delete</button>'+
+
+'</td>'+
+'</tr>'
+
+).join("")+
+
+'</tbody>'+
+'</table>'+
+'</div>'+
+'</div>';
+
+}
+
+
+function editEvent(id){
+
+editingEventId=id;
+
+renderAdmin();
+
+}
+
+
+function cancelEventEdit(){
+
+editingEventId=null;
+
+renderAdmin();
+
+}
+
+
+async function saveEvent(){
+
+let event_date=
+document.getElementById("eventDate").value;
+
+let event_type=
+document.getElementById("eventType").value;
+
+let title=
+document.getElementById("eventTitle").value.trim();
+
+let description=
+document.getElementById("eventDescription").value.trim();
+
+
+if(!event_date||!title){
+
+alert("Enter a date and title.");
+
+return;
+
+}
+
+
+let data={
+event_date:event_date,
+event_type:event_type,
+title:title,
+description:description||null
+};
+
+
+let q;
+
+
+if(editingEventId){
+
+q=await sb.from("events")
+.update(data)
+.eq("id",editingEventId);
+
+}else{
+
+q=await sb.from("events")
+.insert(data);
+
+}
+
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+alert(
+editingEventId?
+"Event updated successfully.":
+"Event added successfully."
+);
+
+
+editingEventId=null;
+
+await load();
+
+render();
+
+tab("admin");
+
+}
+
+
+async function deleteEvent(id){
+
+if(!confirm(
+"Delete this event?"
+))
+return;
+
+
+let q=await sb.from("events")
+.delete()
+.eq("id",id);
+
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+await load();
+
+renderAdmin();
+
+}
+
+
+/* =========================================
+   ANNOUNCEMENTS ADMIN
+========================================= */
+
+function renderAdminAnnouncements(){
+
+let activeCount=
+announcementsData.filter(a=>a.active).length;
+
+
+document.getElementById("adminContent").innerHTML=
+
+'<div class="card">'+
+
+'<h3>Create Announcement</h3>'+
+
+'<div class="field">'+
+'<label>Title</label>'+
+'<input id="annTitle" placeholder="Example: Internship viva reminder">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Message</label>'+
+'<textarea id="annBody" placeholder="Write the announcement here..."></textarea>'+
+'</div>'+
+
+'<button class="primary" onclick="addAnnouncement()">'+
+'Publish announcement'+
+'</button>'+
+
+'</div>'+
+
+'<div class="card section">'+
+
+'<h3>Announcements</h3>'+
+
+'<p class="muted">'+
+activeCount+
+' active announcement(s)'+
+'</p>'+
+
+'<div class="tablewrap">'+
+
+'<table>'+
+
+'<thead><tr>'+
+'<th>Title</th>'+
+'<th>Message</th>'+
+'<th>Status</th>'+
+'<th>Action</th>'+
+'</tr></thead>'+
+
+'<tbody>'+
+
+announcementsData.map(a=>
+
+'<tr>'+
+
+'<td><b>'+esc(a.title)+'</b></td>'+
+
+'<td>'+esc(a.body)+'</td>'+
+
+'<td>'+
+(a.active?
+'<span class="badge">ACTIVE</span>':
+'<span class="badge">HIDDEN</span>')+
+'</td>'+
+
+'<td>'+
+
+'<button class="small primary" onclick="toggleAnnouncement(\''+
+a.id+
+'\','+
+(!a.active)+
+')">'+
+(a.active?"Hide":"Activate")+
+'</button> '+
+
+'<button class="small danger" onclick="deleteAnnouncement(\''+
+a.id+
+'\')">Delete</button>'+
+
+'</td>'+
+
+'</tr>'
+
+).join("")+
+
+'</tbody>'+
+'</table>'+
+'</div>'+
+'</div>';
+
+}
+
+
+async function addAnnouncement(){
+
+let title=
+document.getElementById("annTitle")
+.value.trim();
+
+let body=
+document.getElementById("annBody")
+.value.trim();
+
+
+if(!title||!body){
+
+alert("Enter both a title and message.");
+
+return;
+
+}
+
+
+let q=await sb.from("announcements")
+.insert({
+
+title:title,
+body:body,
+active:true
+
+});
+
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+alert("Announcement published.");
+
+await load();
+
+renderAdmin();
+
+}
+
+
+async function toggleAnnouncement(id,value){
+
+let q=await sb.from("announcements")
+.update({active:value})
+.eq("id",id);
+
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+await load();
+
+renderAdmin();
+
+}
+
+
+async function deleteAnnouncement(id){
+
+if(!confirm(
+"Delete this announcement?"
+))
+return;
+
+
+let q=await sb.from("announcements")
+.delete()
+.eq("id",id);
+
+
+if(q.error){
+
+alert(q.error.message);
+
+return;
+
+}
+
+
+await load();
+
+renderAdmin();
+
+}
+
+
+/* START APP */
 
 (async()=>{
 

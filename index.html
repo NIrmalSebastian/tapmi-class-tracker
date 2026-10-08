@@ -414,7 +414,7 @@ let announcementsData=[];
 let adminSection="students";
 let editingClassId=null;
 let editingEventId=null;
-
+let selectedClassDate=new Date();
 
 const esc=s=>String(s??"").replace(
 /[&<>"']/g,
@@ -808,28 +808,87 @@ c.id+
 
 function renderToday(){
 
-const d=new Date();
+const d=selectedClassDate;
 
 const dateString=
 d.getFullYear()+"-"+
 String(d.getMonth()+1).padStart(2,"0")+"-"+
 String(d.getDate()).padStart(2,"0");
 
+const displayDate=d.toLocaleDateString("en-IN",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+});
 
-const todayClasses=classes.filter(
+const today=new Date();
+
+const todayString=
+today.getFullYear()+"-"+
+String(today.getMonth()+1).padStart(2,"0")+"-"+
+String(today.getDate()).padStart(2,"0");
+
+const isToday=dateString===todayString;
+
+const dayClasses=classes.filter(
 c=>String(c.class_date).slice(0,10)===dateString
 );
 
-
 today.innerHTML=
-'<h3>Today’s classes</h3>'+
+
+'<div class="card">'+
+
+'<div class="row">'+
+
+'<button class="ghost" onclick="changeClassDay(-1)">← Previous Day</button>'+
+
+'<div style="text-align:center">'+
+'<h3 style="margin:0">'+
+(isToday?"Today":"Classes")+
+'</h3>'+
+'<div class="muted">'+
+displayDate+
+'</div>'+
+'</div>'+
+
+'<button class="ghost" onclick="changeClassDay(1)">Next Day →</button>'+
+
+'</div>'+
+
+'<div style="text-align:center;margin-top:12px">'+
+'<button class="small primary" onclick="goToToday()">Today</button>'+
+'</div>'+
+
+'</div>'+
+
 (
-todayClasses.length
+dayClasses.length
 ?
-todayClasses.map(classCard).join("")
+dayClasses.map(classCard).join("")
 :
-'<div class="card"><b>No scheduled classes today.</b></div>'
+'<div class="card"><b>No scheduled classes on this day.</b></div>'
 );
+
+}
+
+
+function changeClassDay(offset){
+
+selectedClassDate.setDate(
+selectedClassDate.getDate()+offset
+);
+
+renderToday();
+
+}
+
+
+function goToToday(){
+
+selectedClassDate=new Date();
+
+renderToday();
 
 }
 

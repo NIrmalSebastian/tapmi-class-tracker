@@ -1,45 +1,1084 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TAPMI Class Tracker</title><meta name="theme-color" content="#0b1020"><style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#687386;--line:#e5e9f0;--accent:#1f6feb;--ok:#14804a;--bad:#c62828}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}header{background:#0b1020;color:#fff;padding:18px 22px;position:sticky;top:0;z-index:10}.bar,.wrap{max-width:1180px;margin:auto}.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800}.sub{font-size:12px;color:#b8c2d5;margin-top:3px}.wrap{padding:24px 16px}button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}button.primary{background:var(--accent);color:#fff}button.ghost{background:#eef3fb;color:#244}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 5px 18px #14213d08}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{font-size:28px;font-weight:800}.muted{color:var(--muted)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button.active{background:#0b1020;color:#fff}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.class{border-left:5px solid var(--accent);margin:10px 0;padding:13px 14px;background:#fff;border-radius:12px;border:1px solid var(--line)}.class.present{border-left-color:var(--ok)}.class.absent{border-left-color:var(--bad)}.time{font-weight:800}.status{font-size:12px;font-weight:800}.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.login{max-width:430px;margin:70px auto}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:10px;font:inherit}.notice,.err{padding:12px;border-radius:10px;margin:12px 0}.notice{background:#fff7df;color:#775500}.err{background:#fff0f0;color:#a11}.hidden{display:none!important}@media(max-width:800px){.grid{grid-template-columns:1fr}.row{align-items:flex-start;flex-direction:column}}
-</style></head><body>
-<header><div class="bar"><div><div class="brand">TAPMI Class Tracker</div><div class="sub">MBA-AI&DS (2025–2027) • Term 5</div></div><div id="account"></div></div></header>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAPMI Class Tracker</title>
+<meta name="theme-color" content="#0b1020">
+
+<style>
+:root{
+--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#687386;
+--line:#e5e9f0;--accent:#1f6feb;--ok:#14804a;--bad:#c62828;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#0b1020;color:#fff;padding:18px 22px;position:sticky;top:0;z-index:10}
+.bar,.wrap{max-width:1180px;margin:auto}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800}.sub{font-size:12px;color:#b8c2d5;margin-top:3px}
+.wrap{padding:24px 16px}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+button.primary{background:var(--accent);color:#fff}
+button.ghost{background:#eef3fb;color:#244}
+button.danger{background:#fff0f0;color:#b11}
+button.small{padding:7px 10px;font-size:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 5px 18px #14213d08}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat{font-size:28px;font-weight:800}
+.muted{color:var(--muted)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tabs button.active{background:#0b1020;color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.class{border-left:5px solid var(--accent);margin:10px 0;padding:13px 14px;background:#fff;border-radius:12px;border:1px solid var(--line)}
+.class.present{border-left-color:var(--ok)}.class.absent{border-left-color:var(--bad)}
+.time{font-weight:800}.status{font-size:12px;font-weight:800}
+.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+th{background:#f7f9fc}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.login{max-width:430px;margin:70px auto}
+.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field input,.field select{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:10px;font:inherit}
+.notice,.err{padding:12px;border-radius:10px;margin:12px 0}
+.notice{background:#fff7df;color:#775500}.err{background:#fff0f0;color:#a11}
+.success{background:#edfff5;color:#12633c;padding:12px;border-radius:10px;margin:12px 0}
+.hidden{display:none!important}
+.adminnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.adminnav button.active{background:#0b1020;color:#fff}
+.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.formgrid .wide{grid-column:span 2}
+.section{margin-top:18px}
+@media(max-width:800px){
+.grid,.formgrid{grid-template-columns:1fr}
+.formgrid .wide{grid-column:span 1}
+.row{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="bar">
+<div>
+<div class="brand">TAPMI Class Tracker</div>
+<div class="sub">MBA-AI&DS (2025–2027) • Term 5</div>
+</div>
+<div id="account"></div>
+</div>
+</header>
+
 <main class="wrap">
-<section id="login" class="login card"><h2>Batch login</h2><p class="muted">Use your Manipal learner email and your Supabase password.</p><div id="loginErr" class="err hidden"></div><div class="field"><label>Email</label><input id="email" type="email"></div><div class="field"><label>Password</label><input id="password" type="password"></div><button class="primary" onclick="doLogin()">Sign in</button></section>
-<section id="app" class="hidden"><div id="welcome" class="card"></div><div class="tabs"><button id="dashBtn" class="active" onclick="tab('dash')">Dashboard</button><button onclick="tab('today')">Today's classes</button><button onclick="tab('attendance')">Batch attendance</button><button id="adminBtn" class="hidden" onclick="tab('admin')">Admin</button><button class="ghost" onclick="doLogout()">Sign out</button></div><div id="dash"></div><div id="today" class="hidden"></div><div id="attendance" class="hidden"></div><div id="admin" class="hidden"></div></section>
+
+<section id="login" class="login card">
+<h2>Batch login</h2>
+<p class="muted">Use your Manipal learner email and your Supabase password.</p>
+<div id="loginErr" class="err hidden"></div>
+
+<div class="field">
+<label>Email</label>
+<input id="email" type="email">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input id="password" type="password">
+</div>
+
+<button class="primary" onclick="doLogin()">Sign in</button>
+</section>
+
+
+<section id="app" class="hidden">
+
+<div id="welcome" class="card"></div>
+
+<div class="tabs">
+<button id="dashBtn" class="active" onclick="tab('dash')">Dashboard</button>
+<button onclick="tab('today')">Today's classes</button>
+<button onclick="tab('attendance')">Batch attendance</button>
+<button id="adminBtn" class="hidden" onclick="tab('admin')">Admin</button>
+<button class="ghost" onclick="doLogout()">Sign out</button>
+</div>
+
+<div id="dash"></div>
+<div id="today" class="hidden"></div>
+<div id="attendance" class="hidden"></div>
+<div id="admin" class="hidden"></div>
+
+</section>
+
 </main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
-const sb=supabase.createClient(TAPMI_CONFIG.supabaseUrl,TAPMI_CONFIG.supabasePublishableKey);let me,profile,subjects=[],classes=[],mine=[],profiles=[];
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+
+const sb=supabase.createClient(
+TAPMI_CONFIG.supabaseUrl,
+TAPMI_CONFIG.supabasePublishableKey
+);
+
+let me,profile,subjects=[],classes=[],mine=[],profiles=[];
+let adminSection="students";
+
+
+const esc=s=>String(s??"").replace(
+/[&<>"']/g,
+m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])
+);
+
 const att=id=>mine.find(x=>x.class_id===id);
-async function doLogin(){loginErr.classList.add("hidden");let r=await sb.auth.signInWithPassword({email:email.value.trim(),password:password.value});if(r.error){loginErr.textContent=r.error.message;loginErr.classList.remove("hidden");return}await boot()}
-async function doLogout(){await sb.auth.signOut();location.reload()}
-async function boot(){let u=await sb.auth.getUser();me=u.data.user;if(!me)return;let p=await sb.from("profiles").select("*").eq("id",me.id).single();if(p.error){loginErr.textContent="Login works, but your profile is not linked. Contact an admin.";loginErr.classList.remove("hidden");return}profile=p.data;login.classList.add("hidden");app.classList.remove("hidden");account.textContent=profile.full_name+" · "+profile.role;if(profile.role==="admin")adminBtn.classList.remove("hidden");await load();render()}
-async function load(){let [s,c,a]=await Promise.all([sb.from("subjects").select("*").order("name"),sb.from("classes").select("*,subjects(name,credits)").order("class_date").order("start_time"),sb.from("attendance").select("*").eq("student_id",me.id)]);if(s.error||c.error||a.error){alert((s.error||c.error||a.error).message);return}subjects=s.data||[];classes=c.data||[];mine=a.data||[];if(profile.role==="admin"){let p=await sb.from("profiles").select("student_id,full_name,email,role").order("student_id");profiles=p.data||[]}}
-function tab(x){["dash","today","attendance","admin"].forEach(y=>document.getElementById(y).classList.toggle("hidden",x!==y));document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));if(x==="dash")dashBtn.classList.add("active")}
-function render(){welcome.innerHTML='<div class="row"><div><h2 style="margin:0">Hi, '+esc(profile.full_name.split(" ")[0])+' 👋</h2><div class="muted">'+esc(profile.student_id)+' · '+esc(profile.email)+'</div></div><b>'+profile.role.toUpperCase()+'</b></div>';renderDash();renderToday();renderAttendance();if(profile.role==="admin")renderAdmin()}
-function renderDash(){dash.innerHTML='<h3>My attendance</h3><div class="grid">'+subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length,allow=s.skip_allowance??s.credits;return '<div class="card"><b>'+esc(s.name)+'</b><div class="muted">'+s.credits+' credits</div><div class="stat">'+p+'/'+(p+a)+'</div><div class="muted">'+Math.max(0,allow-a)+' skip(s) remaining</div></div>'}).join("")+'</div>'}
-function classCard(c){let a=att(c.id),st=a?.status;return '<div class="class '+(st||"")+'"><div class="row"><div><div class="time">'+c.class_date+' · '+c.start_time.slice(0,5)+'–'+c.end_time.slice(0,5)+'</div><b>'+esc(c.subjects?.name||"Class")+'</b><div class="muted">Room: '+esc(c.room||"—")+' · Session '+(c.session_number||"—")+'</div>'+(st?'<div class="status '+(st==="present"?"ok":"bad")+'">'+st.toUpperCase()+'</div>':"")+'</div><button class="'+(st?"ghost":"primary")+'" onclick="mark(\''+c.id+'\',\''+(st==="present"?"absent":"present")+'\')">'+(st==="present"?"Mark absent":"I attended")+'</button></div></div>'}
+
+
+async function doLogin(){
+
+loginErr.classList.add("hidden");
+
+let r=await sb.auth.signInWithPassword({
+email:email.value.trim(),
+password:password.value
+});
+
+if(r.error){
+loginErr.textContent=r.error.message;
+loginErr.classList.remove("hidden");
+return;
+}
+
+await boot();
+}
+
+
+async function doLogout(){
+await sb.auth.signOut();
+location.reload();
+}
+
+
+async function boot(){
+
+let u=await sb.auth.getUser();
+me=u.data.user;
+
+if(!me)return;
+
+let p=await sb.from("profiles")
+.select("*")
+.eq("id",me.id)
+.single();
+
+if(p.error){
+loginErr.textContent="Login works, but your profile is not linked. Contact an admin.";
+loginErr.classList.remove("hidden");
+return;
+}
+
+profile=p.data;
+
+login.classList.add("hidden");
+app.classList.remove("hidden");
+
+account.textContent=profile.full_name+" · "+profile.role;
+
+if(profile.role==="admin")
+adminBtn.classList.remove("hidden");
+
+await load();
+render();
+}
+
+
+async function load(){
+
+let [s,c,a]=await Promise.all([
+
+sb.from("subjects")
+.select("*")
+.order("name"),
+
+sb.from("classes")
+.select("*,subjects(name,credits)")
+.order("class_date")
+.order("start_time"),
+
+sb.from("attendance")
+.select("*")
+.eq("student_id",me.id)
+
+]);
+
+if(s.error||c.error||a.error){
+
+alert((s.error||c.error||a.error).message);
+return;
+
+}
+
+subjects=s.data||[];
+classes=c.data||[];
+mine=a.data||[];
+
+
+if(profile.role==="admin"){
+
+let p=await sb.from("profiles")
+.select("id,student_id,full_name,email,role")
+.order("student_id");
+
+profiles=p.data||[];
+
+}
+
+}
+
+
+function tab(x){
+
+["dash","today","attendance","admin"]
+.forEach(y=>{
+document.getElementById(y).classList.toggle("hidden",x!==y)
+});
+
+document.querySelectorAll(".tabs button")
+.forEach(b=>b.classList.remove("active"));
+
+if(x==="dash")dashBtn.classList.add("active");
+
+}
+
+
+function render(){
+
+welcome.innerHTML=
+'<div class="row">'+
+'<div>'+
+'<h2 style="margin:0">Hi, '+
+esc(profile.full_name.split(" ")[0])+
+' 👋</h2>'+
+'<div class="muted">'+
+esc(profile.student_id)+" · "+
+esc(profile.email)+
+'</div>'+
+'</div>'+
+'<b>'+profile.role.toUpperCase()+'</b>'+
+'</div>';
+
+renderDash();
+renderToday();
+renderAttendance();
+
+if(profile.role==="admin")
+renderAdmin();
+
+}
+
+
+function renderDash(){
+
+dash.innerHTML=
+'<h3>My attendance</h3>'+
+'<div class="grid">'+
+
+subjects.map(s=>{
+
+let cs=classes.filter(c=>c.subject_id===s.id);
+
+let p=cs.filter(c=>
+att(c.id)?.status==="present").length;
+
+let a=cs.filter(c=>
+att(c.id)?.status==="absent").length;
+
+let allow=s.skip_allowance??s.credits;
+
+return '<div class="card">'+
+'<b>'+esc(s.name)+'</b>'+
+'<div class="muted">'+s.credits+' credits</div>'+
+'<div class="stat">'+p+'/'+(p+a)+'</div>'+
+'<div class="muted">'+
+Math.max(0,allow-a)+
+' skip(s) remaining</div>'+
+'</div>';
+
+}).join("")+
+'</div>';
+
+}
+
+
+function classCard(c){
+
+let a=att(c.id);
+let st=a?.status;
+
+return '<div class="class '+(st||"")+'">'+
+
+'<div class="row">'+
+
+'<div>'+
+
+'<div class="time">'+
+c.class_date+
+' · '+
+c.start_time.slice(0,5)+
+'–'+
+c.end_time.slice(0,5)+
+'</div>'+
+
+'<b>'+
+esc(c.subjects?.name||"Class")+
+'</b>'+
+
+'<div class="muted">'+
+'Room: '+
+esc(c.room||"—")+
+' · Session '+
+(c.session_number||"—")+
+'</div>'+
+
+(st?
+'<div class="status '+
+(st==="present"?"ok":"bad")+
+'">'+
+st.toUpperCase()+
+'</div>'
+:"")+
+
+'</div>'+
+
+'<button class="'+
+(st?"ghost":"primary")+
+'" onclick="mark(\''+
+c.id+
+'\',\''+
+(st==="present"?"absent":"present")+
+'\')">'+
+
+(st==="present"?"Mark absent":"I attended")+
+
+'</button>'+
+
+'</div>'+
+'</div>';
+
+}
+
+
 function renderToday(){
-  const todayDate = new Date();
-  const year = todayDate.getFullYear();
-  const month = String(todayDate.getMonth() + 1).padStart(2,"0");
-  const day = String(todayDate.getDate()).padStart(2,"0");
-  const dateString = `${year}-${month}-${day}`;
 
-  const todayClasses = classes.filter(
-    c => String(c.class_date).slice(0,10) === dateString
-  );
+const d=new Date();
 
-  const todaySection = document.getElementById("today");
+const dateString=
+d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 
-  todaySection.innerHTML =
-    '<h3>Today’s classes</h3>' +
-    (
-      todayClasses.length
-      ? todayClasses.map(classCard).join("")
-      : '<div class="card"><b>No scheduled classes today.</b></div>'
-    );
-}function renderAttendance(){let rows=subjects.map(s=>{let cs=classes.filter(c=>c.subject_id===s.id),p=cs.filter(c=>att(c.id)?.status==="present").length,a=cs.filter(c=>att(c.id)?.status==="absent").length;return '<tr><td><b>'+esc(s.name)+'</b></td><td>'+p+'</td><td>'+a+'</td><td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td><td>'+Math.max(0,(s.skip_allowance??s.credits)-a)+'</td></tr>'}).join("");attendance.innerHTML='<h3>My attendance summary</h3><div class="tablewrap"><table><thead><tr><th>Subject</th><th>Present</th><th>Absent</th><th>%</th><th>Skips left</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="margin-top:24px">Batch attendance</h3><div id="batch" class="card">Loading…</div>';loadBatch()}
-async function loadBatch(){let q=await sb.from("batch_attendance").select("*").order("student_id");if(q.error){batch.innerHTML='<div class="notice">Batch view needs the SQL patch to be run first.</div>';return}let g={};(q.data||[]).forEach(r=>(g[r.student_id]??=[]).push(r));let rows=Object.entries(g).map(([id,rs])=>{let p=rs.filter(x=>x.status==="present").length,a=rs.filter(x=>x.status==="absent").length,pc=p+a?Math.round(p/(p+a)*100):0;return '<tr><td>'+esc(id)+'</td><td>'+esc(rs[0].full_name)+'</td><td>'+p+'</td><td>'+a+'</td><td>'+pc+'%</td></tr>'}).join("");batch.innerHTML='<div class="tablewrap"><table><thead><tr><th>ID</th><th>Student</th><th>Present</th><th>Absent</th><th>%</th></tr></thead><tbody>'+rows+'</tbody></table></div>'}
-async function mark(classId,status){let q=await sb.from("attendance").upsert({student_id:me.id,class_id:classId,status,marked_at:new Date().toISOString()},{onConflict:"student_id,class_id"});if(q.error){alert(q.error.message);return}await load();render();tab("today")}
-function renderAdmin(){admin.innerHTML='<h3>Admin dashboard</h3><div class="grid"><div class="card"><div class="stat">'+profiles.length+'</div><div class="muted">Batch profiles</div></div><div class="card"><div class="stat">'+classes.length+'</div><div class="muted">Classes</div></div><div class="card"><div class="stat">'+subjects.length+'</div><div class="muted">Subjects</div></div></div><div class="card" style="margin-top:16px"><h3>Batch members</h3><div class="tablewrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>'+profiles.map(p=>'<tr><td>'+esc(p.student_id)+'</td><td>'+esc(p.full_name)+'</td><td>'+esc(p.email)+'</td><td>'+esc(p.role)+'</td></tr>').join("")+'</tbody></table></div></div><div class="notice">Admin timetable editing will be enabled in the next module after we verify the login and attendance flow.</div>'}
-(async()=>{let s=await sb.auth.getSession();if(s.data.session)await boot()})();</script></body></html>
+const todayClasses=classes.filter(
+c=>String(c.class_date).slice(0,10)===dateString
+);
+
+today.innerHTML=
+'<h3>Today’s classes</h3>'+
+(
+todayClasses.length
+?todayClasses.map(classCard).join("")
+:'<div class="card"><b>No scheduled classes today.</b></div>'
+);
+
+}
+
+
+function renderAttendance(){
+
+let rows=subjects.map(s=>{
+
+let cs=classes.filter(c=>c.subject_id===s.id);
+
+let p=cs.filter(c=>att(c.id)?.status==="present").length;
+
+let a=cs.filter(c=>att(c.id)?.status==="absent").length;
+
+return '<tr>'+
+'<td><b>'+esc(s.name)+'</b></td>'+
+'<td>'+p+'</td>'+
+'<td>'+a+'</td>'+
+'<td>'+((p+a)?Math.round(p/(p+a)*100):0)+'%</td>'+
+'<td>'+
+Math.max(0,(s.skip_allowance??s.credits)-a)+
+'</td>'+
+'</tr>';
+
+}).join("");
+
+attendance.innerHTML=
+'<h3>My attendance summary</h3>'+
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>Subject</th>'+
+'<th>Present</th>'+
+'<th>Absent</th>'+
+'<th>%</th>'+
+'<th>Skips left</th>'+
+'</tr></thead>'+
+'<tbody>'+rows+'</tbody>'+
+'</table>'+
+'</div>'+
+
+'<h3 style="margin-top:24px">Batch attendance</h3>'+
+'<div id="batch" class="card">Loading…</div>';
+
+loadBatch();
+
+}
+
+
+async function loadBatch(){
+
+let q=await sb.from("batch_attendance")
+.select("*")
+.order("student_id");
+
+if(q.error){
+
+batch.innerHTML=
+'<div class="notice">'+
+'Batch attendance could not be loaded.'+
+'</div>';
+
+return;
+
+}
+
+let g={};
+
+(q.data||[]).forEach(
+r=>(g[r.student_id]??=[]).push(r)
+);
+
+let rows=Object.entries(g).map(
+([id,rs])=>{
+
+let p=rs.filter(
+x=>x.status==="present"
+).length;
+
+let a=rs.filter(
+x=>x.status==="absent"
+).length;
+
+let pc=p+a?
+Math.round(p/(p+a)*100):0;
+
+return '<tr>'+
+'<td>'+esc(id)+'</td>'+
+'<td>'+esc(rs[0].full_name)+'</td>'+
+'<td>'+p+'</td>'+
+'<td>'+a+'</td>'+
+'<td>'+pc+'%</td>'+
+'</tr>';
+
+}).join("");
+
+batch.innerHTML=
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>ID</th>'+
+'<th>Student</th>'+
+'<th>Present</th>'+
+'<th>Absent</th>'+
+'<th>%</th>'+
+'</tr></thead>'+
+'<tbody>'+rows+'</tbody>'+
+'</table>'+
+'</div>';
+
+}
+
+
+async function mark(classId,status){
+
+let q=await sb.from("attendance").upsert({
+
+student_id:me.id,
+class_id:classId,
+status:status,
+marked_at:new Date().toISOString()
+
+},{onConflict:"student_id,class_id"});
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+await load();
+render();
+tab("today");
+
+}
+
+
+/* =========================================
+   ADMIN PANEL
+========================================= */
+
+
+function renderAdmin(){
+
+admin.innerHTML=
+
+'<h2>Admin Panel</h2>'+
+'<p class="muted">Manage students, subjects, timetable and attendance.</p>'+
+
+'<div class="adminnav">'+
+
+'<button class="'+
+(adminSection==="students"?"active":"")+
+'" onclick="adminSection=\'students\';renderAdmin()">Students</button>'+
+
+'<button class="'+
+(adminSection==="subjects"?"active":"")+
+'" onclick="adminSection=\'subjects\';renderAdmin()">Subjects</button>'+
+
+'<button class="'+
+(adminSection==="classes"?"active":"")+
+'" onclick="adminSection=\'classes\';renderAdmin()">Timetable</button>'+
+
+'<button class="'+
+(adminSection==="attendance"?"active":"")+
+'" onclick="adminSection=\'attendance\';renderAdmin()">Attendance</button>'+
+
+'</div>'+
+
+'<div id="adminContent"></div>';
+
+if(adminSection==="students")
+renderAdminStudents();
+
+if(adminSection==="subjects")
+renderAdminSubjects();
+
+if(adminSection==="classes")
+renderAdminClasses();
+
+if(adminSection==="attendance")
+renderAdminAttendance();
+
+}
+
+
+/* STUDENTS */
+
+function renderAdminStudents(){
+
+let html=
+
+'<div class="card">'+
+'<h3>Batch Students</h3>'+
+'<p class="muted">There are '+profiles.length+' registered profiles.</p>'+
+
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>ID</th>'+
+'<th>Name</th>'+
+'<th>Email</th>'+
+'<th>Role</th>'+
+'<th>Action</th>'+
+'</tr></thead>'+
+'<tbody>'+
+
+profiles.map(p=>
+
+'<tr>'+
+'<td>'+esc(p.student_id)+'</td>'+
+'<td>'+esc(p.full_name)+'</td>'+
+'<td>'+esc(p.email)+'</td>'+
+'<td>'+
+'<select id="role_'+p.id+'">'+
+'<option value="student" '+
+(p.role==="student"?"selected":"")+
+'>Student</option>'+
+'<option value="admin" '+
+(p.role==="admin"?"selected":"")+
+'>Admin</option>'+
+'</select>'+
+'</td>'+
+'<td>'+
+'<button class="small primary" onclick="changeRole(\''+
+p.id+'\')">Save</button>'+
+'</td>'+
+'</tr>'
+
+).join("")+
+
+'</tbody>'+
+'</table>'+
+'</div>'+
+'</div>';
+
+document.getElementById("adminContent").innerHTML=html;
+
+}
+
+
+async function changeRole(id){
+
+let value=document.getElementById("role_"+id).value;
+
+if(!confirm("Change this user's role to "+value+"?"))
+return;
+
+let q=await sb.from("profiles")
+.update({role:value})
+.eq("id",id);
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+alert("Role updated successfully.");
+
+await load();
+renderAdmin();
+
+}
+
+
+/* SUBJECTS */
+
+function renderAdminSubjects(){
+
+let html=
+
+'<div class="card">'+
+'<h3>Add Subject</h3>'+
+
+'<div class="formgrid">'+
+
+'<div class="field">'+
+'<label>Subject name</label>'+
+'<input id="newSubName" placeholder="Example: Generative AI">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Credits</label>'+
+'<input id="newSubCredits" type="number" min="1" value="3">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Skip allowance</label>'+
+'<input id="newSubSkip" type="number" min="0" value="3">'+
+'</div>'+
+
+'</div>'+
+
+'<button class="primary" onclick="addSubject()">Add subject</button>'+
+'</div>'+
+
+'<div class="card section">'+
+'<h3>Existing Subjects</h3>'+
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>Subject</th>'+
+'<th>Credits</th>'+
+'<th>Skip allowance</th>'+
+'<th>Action</th>'+
+'</tr></thead>'+
+'<tbody>'+
+
+subjects.map(s=>
+
+'<tr>'+
+'<td>'+esc(s.name)+'</td>'+
+'<td>'+
+'<input id="credit_'+s.id+'" type="number" value="'+s.credits+'" style="width:80px">'+
+'</td>'+
+'<td>'+
+'<input id="skip_'+s.id+'" type="number" value="'+(s.skip_allowance??s.credits)+'" style="width:80px">'+
+'</td>'+
+'<td>'+
+'<button class="small primary" onclick="saveSubject(\''+
+s.id+'\')">Save</button> '+
+'<button class="small danger" onclick="deleteSubject(\''+
+s.id+'\')">Delete</button>'+
+'</td>'+
+'</tr>'
+
+).join("")+
+
+'</tbody>'+
+'</table>'+
+'</div>'+
+'</div>';
+
+document.getElementById("adminContent").innerHTML=html;
+
+}
+
+
+async function addSubject(){
+
+let name=document.getElementById("newSubName").value.trim();
+
+let credits=Number(
+document.getElementById("newSubCredits").value
+);
+
+let skip=Number(
+document.getElementById("newSubSkip").value
+);
+
+if(!name){
+alert("Enter a subject name.");
+return;
+}
+
+let q=await sb.from("subjects").insert({
+
+name:name,
+credits:credits,
+skip_allowance:skip
+
+});
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+alert("Subject added.");
+
+await load();
+renderAdmin();
+
+}
+
+
+async function saveSubject(id){
+
+let credits=Number(
+document.getElementById("credit_"+id).value
+);
+
+let skip=Number(
+document.getElementById("skip_"+id).value
+);
+
+let q=await sb.from("subjects")
+.update({
+credits:credits,
+skip_allowance:skip
+})
+.eq("id",id);
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+alert("Subject updated.");
+
+await load();
+render();
+tab("admin");
+
+}
+
+
+async function deleteSubject(id){
+
+if(!confirm(
+"Delete this subject? This may fail if classes already use it."
+))
+return;
+
+let q=await sb.from("subjects")
+.delete()
+.eq("id",id);
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+await load();
+renderAdmin();
+
+}
+
+
+/* TIMETABLE */
+
+function renderAdminClasses(){
+
+let html=
+
+'<div class="card">'+
+'<h3>Add Class</h3>'+
+
+'<div class="formgrid">'+
+
+'<div class="field wide">'+
+'<label>Subject</label>'+
+'<select id="newClassSubject">'+
+subjects.map(s=>
+'<option value="'+s.id+'">'+
+esc(s.name)+
+'</option>'
+).join("")+
+'</select>'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Date</label>'+
+'<input id="newClassDate" type="date">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Start time</label>'+
+'<input id="newClassStart" type="time">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>End time</label>'+
+'<input id="newClassEnd" type="time">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Room</label>'+
+'<input id="newClassRoom" placeholder="BS 03">'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Session number</label>'+
+'<input id="newClassSession" type="number" min="1">'+
+'</div>'+
+
+'</div>'+
+
+'<button class="primary" onclick="addClass()">Add class</button>'+
+'</div>'+
+
+'<div class="card section">'+
+'<h3>Scheduled Classes</h3>'+
+'<div class="tablewrap">'+
+'<table>'+
+'<thead><tr>'+
+'<th>Date</th>'+
+'<th>Time</th>'+
+'<th>Subject</th>'+
+'<th>Room</th>'+
+'<th>Session</th>'+
+'<th>Action</th>'+
+'</tr></thead>'+
+'<tbody>'+
+
+classes.map(c=>
+
+'<tr>'+
+'<td>'+esc(c.class_date)+'</td>'+
+'<td>'+
+esc(c.start_time.slice(0,5))+
+'–'+
+esc(c.end_time.slice(0,5))+
+'</td>'+
+'<td>'+esc(c.subjects?.name||"")+'</td>'+
+'<td>'+esc(c.room||"")+'</td>'+
+'<td>'+esc(c.session_number||"")+'</td>'+
+'<td>'+
+'<button class="small danger" onclick="deleteClass(\''+
+c.id+'\')">Delete</button>'+
+'</td>'+
+'</tr>'
+
+).join("")+
+
+'</tbody>'+
+'</table>'+
+'</div>'+
+'</div>';
+
+document.getElementById("adminContent").innerHTML=html;
+
+}
+
+
+async function addClass(){
+
+let subject_id=document.getElementById("newClassSubject").value;
+
+let class_date=document.getElementById("newClassDate").value;
+
+let start_time=document.getElementById("newClassStart").value;
+
+let end_time=document.getElementById("newClassEnd").value;
+
+let room=document.getElementById("newClassRoom").value.trim();
+
+let session_number=Number(
+document.getElementById("newClassSession").value
+);
+
+if(!subject_id||!class_date||!start_time||!end_time){
+alert("Please fill subject, date and times.");
+return;
+}
+
+let q=await sb.from("classes").insert({
+
+subject_id:subject_id,
+class_date:class_date,
+start_time:start_time,
+end_time:end_time,
+room:room||null,
+session_number:session_number||null
+
+});
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+alert("Class added successfully.");
+
+await load();
+renderAdmin();
+
+}
+
+
+async function deleteClass(id){
+
+if(!confirm("Delete this class from the timetable?"))
+return;
+
+let q=await sb.from("classes")
+.delete()
+.eq("id",id);
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+await load();
+renderAdmin();
+
+}
+
+
+/* ADMIN ATTENDANCE */
+
+function renderAdminAttendance(){
+
+let options=profiles.map(p=>
+'<option value="'+p.id+'">'+
+esc(p.student_id)+" — "+
+esc(p.full_name)+
+'</option>'
+).join("");
+
+let classOptions=classes.map(c=>
+'<option value="'+c.id+'">'+
+esc(c.class_date)+" · "+
+esc(c.subjects?.name||"Class")+" · "+
+esc(c.start_time.slice(0,5))+
+'</option>'
+).join("");
+
+document.getElementById("adminContent").innerHTML=
+
+'<div class="card">'+
+'<h3>Attendance Correction</h3>'+
+'<p class="muted">Use this when an attendance record needs to be corrected.</p>'+
+
+'<div class="formgrid">'+
+
+'<div class="field">'+
+'<label>Student</label>'+
+'<select id="attStudent">'+
+options+
+'</select>'+
+'</div>'+
+
+'<div class="field wide">'+
+'<label>Class</label>'+
+'<select id="attClass">'+
+classOptions+
+'</select>'+
+'</div>'+
+
+'<div class="field">'+
+'<label>Status</label>'+
+'<select id="attStatus">'+
+'<option value="present">Present</option>'+
+'<option value="absent">Absent</option>'+
+'</select>'+
+'</div>'+
+
+'</div>'+
+
+'<button class="primary" onclick="adminSetAttendance()">Save attendance</button>'+
+
+'</div>';
+
+}
+
+
+async function adminSetAttendance(){
+
+let student_id=document.getElementById("attStudent").value;
+
+let class_id=document.getElementById("attClass").value;
+
+let status=document.getElementById("attStatus").value;
+
+let q=await sb.from("attendance").upsert({
+
+student_id:student_id,
+class_id:class_id,
+status:status,
+marked_at:new Date().toISOString()
+
+},{onConflict:"student_id,class_id"});
+
+if(q.error){
+alert(q.error.message);
+return;
+}
+
+alert("Attendance corrected successfully.");
+
+await load();
+render();
+
+tab("admin");
+
+}
+
+
+/* START */
+
+(async()=>{
+
+let s=await sb.auth.getSession();
+
+if(s.data.session)
+await boot();
+
+})();
+
+</script>
+
+</body>
+</html>

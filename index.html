@@ -521,7 +521,9 @@ render();
 
 async function load(){
 
-let results=await Promise.all([
+/* CORE DATA — Events/Announcements must not break the main app */
+
+let [s,c,a]=await Promise.all([
 
 sb.from("subjects")
 .select("*")
@@ -534,59 +536,62 @@ sb.from("classes")
 
 sb.from("attendance")
 .select("*")
-.eq("student_id",me.id),
-
-sb.from("events")
-.select("*")
-.order("event_date"),
-
-sb.from("announcements")
-.select("*")
-.order("created_at",{ascending:false})
+.eq("student_id",me.id)
 
 ]);
 
+if(s.error||c.error||a.error){
 
-let s=results[0];
-let c=results[1];
-let a=results[2];
-let e=results[3];
-let n=results[4];
+console.log("CORE DATA ERROR",s.error,c.error,a.error);
 
-
-if(s.error||c.error||a.error||e.error||n.error){
-
-console.log(
-s.error,
-c.error,
-a.error,
-e.error,
-n.error
-);
-
-alert(
-(s.error||
-c.error||
-a.error||
-e.error||
-n.error).message
-);
+alert((s.error||c.error||a.error).message);
 
 return;
 
 }
 
-
 subjects=s.data||[];
-
 classes=c.data||[];
-
 mine=a.data||[];
+
+
+/* EVENTS */
+
+let e=await sb.from("events")
+.select("*")
+.order("event_date");
+
+if(e.error){
+
+console.log("EVENTS ERROR",e.error);
+eventsData=[];
+
+}else{
 
 eventsData=e.data||[];
 
+}
+
+
+/* ANNOUNCEMENTS */
+
+let n=await sb.from("announcements")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(n.error){
+
+console.log("ANNOUNCEMENTS ERROR",n.error);
+announcementsData=[];
+
+}else{
+
 announcementsData=n.data||[];
 
+}
+
+
+/* ADMIN PROFILES */
 
 if(profile.role==="admin"){
 
@@ -594,12 +599,20 @@ let p=await sb.from("profiles")
 .select("id,student_id,full_name,email,role")
 .order("student_id");
 
+if(p.error){
+
+console.log("PROFILES ERROR",p.error);
+profiles=[];
+
+}else{
+
 profiles=p.data||[];
 
 }
 
 }
 
+}
 
 /* TABS */
 
